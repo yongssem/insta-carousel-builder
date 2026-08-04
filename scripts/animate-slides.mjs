@@ -19,6 +19,7 @@
  *   node scripts/build-v5-slides.mjs --data <json> --topic <t> --animate 1
  *   node scripts/animate-slides.mjs --topic <t>
  *   node scripts/animate-slides.mjs --topic <t> --only 5 --duration 4
+ *   node scripts/animate-slides.mjs --topic <t> --gif 1     # 블로그용 GIF 동시 출력
  *
  * 결과:
  *   output/<topic>/video/slide-01.mp4 ~ slide-09.mp4
@@ -71,6 +72,38 @@ async function findFfmpeg() {
   return null;
 }
 
+/** GIF 인코딩 (팔레트 생성 → 적용, 2-pass).
+ *  ⚠️ 인스타 피드/캐러셀에는 쓰지 마세요 — GIF 를 올리면 애니메이션이 죽고
+ *     첫 프레임만 정지 이미지로 올라갑니다. 블로그·스레드·카톡용입니다. */
+function encodeGif(ffmpeg, frames, fps, outPath) {
+  return new Promise((resolve2, reject) => {
+    const p = spawn(ffmpeg, [
+      '-y',
+      '-f', 'image2pipe',
+      '-framerate', String(fps),
+      '-i', '-',
+      '-filter_complex',
+      // 용량을 위해 폭 540 으로 줄이고 팔레트를 만들어 적용
+      `[0:v] fps=${fps},scale=540:-1:flags=lanczos,split [a][b];` +
+        `[a] palettegen=stats_mode=diff [p];[b][p] paletteuse=dither=bayer:bayer_scale=3`,
+      '-loop', '0',
+      outPath,
+    ]);
+    let err = '';
+    p.stderr.on('data', (d) => (err += d));
+    p.on('error', reject);
+    p.on('close', (code) =>
+      code === 0 ? resolve2() : reject(new Error(`ffmpeg(gif) exited ${code}\n${err.slice(-1500)}`))
+    );
+    (async () => {
+      for (const f of frames) {
+        if (!p.stdin.write(f)) await new Promise((r) => p.stdin.once('drain', r));
+      }
+      p.stdin.end();
+    })();
+  });
+}
+
 function encode(ffmpeg, frames, fps, outPath) {
   return new Promise((resolve2, reject) => {
     const p = spawn(ffmpeg, [
@@ -109,6 +142,7 @@ async function main() {
   const fps = Number(args.fps || 30);
   const duration = Number(args.duration || 3.5);
   const total = Math.round(fps * duration);
+  const wantGif = args.gif !== undefined;
 
   const slidesDir = join(REPO_ROOT, 'output', topic, 'slides-anim');
   const outDir = join(REPO_ROOT, 'output', topic, 'video');
@@ -139,7 +173,8 @@ async function main() {
 
   mkdirSync(outDir, { recursive: true });
   console.log(`\nffmpeg: ${ffmpeg}`);
-  console.log(`${files.length}장 · ${duration}초 · ${fps}fps · ${total}프레임/장 · ${W}×${H}\n`);
+  console.log(`${files.length}장 · ${duration}초 · ${fps}fps · ${total}프레임/장 · ${W}×${H}`);
+  console.log(wantGif ? 'MP4 + GIF (GIF 는 인스타 피드 업로드 불가 — 블로그/스레드용)\n' : 'MP4 (인스타 업로드용)\n');
 
   const browser = await puppeteer.launch({
     headless: 'new',
@@ -178,7 +213,13 @@ async function main() {
 
       const out = join(outDir, file.replace('.html', '.mp4'));
       await encode(ffmpeg, frames, fps, out);
-      console.log(`  ✓ ${file.replace('.html', '.mp4')}`);
+      let line = `  ✓ ${file.replace('.html', '.mp4')}`;
+      if (wantGif) {
+        const g = join(outDir, file.replace('.html', '.gif'));
+        await encodeGif(ffmpeg, frames, fps, g);
+        line += ` + ${file.replace('.html', '.gif')}`;
+      }
+      console.log(line);
     }
   } finally {
     await browser.close();

@@ -70,6 +70,21 @@ node scripts/animate-slides.mjs --topic <t>          # → output/<t>/video/slid
 | **결정성** | Web Animations API 로 `currentTime` 을 직접 지정해 캡처 → 몇 번 돌려도 동일 결과 |
 | **정적본 병행** | 영상이 안 도는 환경 대비로 PNG 9장도 같이 뽑아둘 것 |
 
+#### ⚠️ GIF 로 올리면 안 됩니다
+
+인스타 **피드/캐러셀은 GIF 애니메이션을 지원하지 않습니다.** GIF 를 올리면
+애니메이션이 죽고 **첫 프레임만 정지 이미지로** 올라갑니다.
+GIF 가 실제로 움직이는 곳은 스토리·DM 의 GIPHY 스티커뿐입니다.
+공식 가이드들도 "GIF 는 MP4 로 변환해서 올려라"로 통일돼 있습니다.
+
+`--gif 1` 옵션은 **블로그(딸깍교실)·스레드·카톡 공유용**입니다. 인스타에는 MP4 를 쓰세요.
+
+```bash
+node scripts/animate-slides.mjs --topic <t> --gif 1   # MP4 + GIF 동시 출력
+```
+
+피드 영상은 **최소 3초** 규격이 있어 기본 길이를 3.5초로 잡았습니다. 더 줄이지 마세요.
+
 애니메이션 CSS 는 `build-v5-slides.mjs` 안에 `body.anim` 스코프로 들어 있습니다.
 정적 빌드(`--animate` 없음)에는 적용되지 않습니다.
 
