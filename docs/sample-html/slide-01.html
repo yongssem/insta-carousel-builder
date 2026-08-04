@@ -5,17 +5,40 @@
 <style>
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
   *{margin:0;padding:0;box-sizing:border-box}
-  body{width:1080px;height:1350px;background:#131316;font-family:'Pretendard Variable',sans-serif;color:#fff;overflow:hidden;position:relative}
+  body{width:1080px;height:1350px;background:#0B0B0E;font-family:'Pretendard Variable',sans-serif;color:#fff;overflow:hidden;position:relative}
+  .mono{font-family:'SF Mono','Consolas','Courier New',monospace}
+  .glow{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(207,92,63,0.16) 0%,rgba(207,92,63,0) 62%);pointer-events:none}
+  .grain{position:absolute;inset:0;opacity:.4;mix-blend-mode:overlay;pointer-events:none;z-index:6;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
+  .progress{position:absolute;top:0;left:0;height:5px;background:linear-gradient(90deg,#F0956B,#CF5C3F);z-index:5}
+  .pill{display:inline-flex;align-items:center;gap:14px;padding:15px 30px;border:1.5px solid rgba(207,92,63,0.55);border-radius:999px;background:rgba(207,92,63,0.09);font-size:20px;font-weight:700;letter-spacing:0.16em;color:#E98A63}
+  .pill i{width:9px;height:9px;border-radius:50%;background:#CF5C3F;box-shadow:0 0 12px rgba(207,92,63,0.9)}
+  .ghost{position:absolute;font-weight:800;line-height:.8;letter-spacing:-0.04em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,0.07);pointer-events:none;z-index:0}
+  .footer{position:absolute;bottom:52px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:center;z-index:4}
+  .footer .brand{font-size:17px;font-weight:700;letter-spacing:0.22em;color:rgba(255,255,255,0.25)}
+  .grad{background:linear-gradient(115deg,#F0956B 10%,#CF5C3F 85%);-webkit-background-clip:text;background-clip:text;color:transparent}
 </style>
 </head>
 <body>
-  <div style="position:absolute;bottom:120px;left:80px;right:80px">
-    <div style="font-size:21px;font-weight:600;letter-spacing:0.13em;color:#CF5C3F;margin-bottom:32px">CLAUDE CODE GUIDE</div>
-    <div style="font-size:72px;font-weight:800;line-height:1.2;letter-spacing:-0.03em;word-break:keep-all">
-      해커톤 우승자의<br/><span style="color:#CF5C3F">꿀팁 7가지</span>
+  <div class="progress" style="width:120px"></div>
+  <div class="glow" style="top:-260px;right:-260px"></div>
+  <div class="ghost" style="top:60px;right:-30px;font-size:440px">07</div>
+
+  <div style="position:absolute;bottom:170px;left:80px;right:80px;z-index:2">
+    <div class="pill" style="margin-bottom:44px"><i></i>CLAUDE CODE GUIDE</div>
+    <div style="font-size:96px;font-weight:900;line-height:1.14;letter-spacing:-0.035em;word-break:keep-all">
+      해커톤 우승자의<br/><span class="grad">꿀팁 7가지</span>
     </div>
-    <div style="margin-top:40px;width:56px;height:4px;background:#CF5C3F;border-radius:2px"></div>
-    <div style="margin-top:28px;font-size:22px;color:rgba(255,255,255,0.4);line-height:1.5">저장 필수. 하나씩 적용해보세요.</div>
+    <div style="margin-top:44px;width:64px;height:6px;border-radius:3px;background:linear-gradient(90deg,#F0956B,#CF5C3F)"></div>
+    <div style="margin-top:30px;font-size:24px;color:rgba(255,255,255,0.45);line-height:1.5">저장 필수. 하나씩 적용해보세요.</div>
   </div>
+
+  <div class="footer">
+    <div class="brand">CLAUDE CODE GUIDE</div>
+    <div style="display:inline-flex;align-items:center;gap:12px;padding:13px 26px;border-radius:999px;border:1px solid rgba(255,255,255,0.14);background:rgba(255,255,255,0.04);font-size:17px;font-weight:700;letter-spacing:0.18em;color:rgba(255,255,255,0.5)">
+      SWIPE
+      <svg width="20" height="14" viewBox="0 0 20 14" fill="none"><path d="M1 7h16M12 1.5 18 7l-6 5.5" stroke="#E98A63" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </div>
+  <div class="grain"></div>
 </body>
 </html>

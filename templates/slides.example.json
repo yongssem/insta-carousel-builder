@@ -1,16 +1,16 @@
 {
   "_comment": "인스타 캐러셀 9장 예제 — 에이나우 'Claude Code 7가지 꿀팁' 실증 버전. 본인 주제에 맞게 slides[].prompt 를 수정하세요. common_style 은 디자인 DNA 라 놔두는 걸 권장.",
-  "common_style": "Instagram carousel slide design, 4:5 aspect ratio (1080x1350 px). Magazine editorial style, premium dark minimalist. - Background: near-black #131316. - Primary accent color: warm orange #CF5C3F. - Primary text: pure white #FFFFFF. - Secondary text: white 40% opacity. - Typography: Korean sans-serif (Pretendard-like), bold headlines, monospace for code. - Layout: generous whitespace, left-aligned, tech magazine feel. - Mood: professional, developer-focused, clean, modern.",
+  "common_style": "Instagram carousel slide design, 4:5 aspect ratio (1080x1350 px). Trendy magazine editorial style, premium dark. - Background: deep black #0B0B0E with ONE soft warm radial glow (top-right, orange tinted, subtle) and a very subtle film grain texture. - Primary accent: warm orange gradient from #F0956B to #CF5C3F (used for headline keyword, thin progress bar at very top, underline bar). - Primary text: pure white #FFFFFF. - Secondary text: white 45% opacity. - Labels: rounded pill chip with thin orange border, small glowing orange dot, uppercase letter-spaced text. - Signature: huge outlined ghost number in background top-right (outline only, white 7% opacity). - Footer on every slide: small letter-spaced brand name bottom-left, page number like '02 / 09' bottom-right (current number orange). - Typography: Korean sans-serif (Pretendard-like), oversized extra-bold headlines with tight letter-spacing, monospace only for code/numbers. - Cards: dark surface with 1px white 9% hairline border, 24px rounded corners. - Layout: generous whitespace, left-aligned, trendy tech magazine feel. - Mood: professional, developer-focused, clean, modern, premium.",
   "slides": [
     {
       "n": 1,
       "role": "Cover",
-      "prompt": "COVER SLIDE for carousel titled \"Claude Code Guide\". Layout: - Small orange uppercase label \"CLAUDE CODE GUIDE\" at bottom-left. - Large bold Korean headline: \"해커톤 우승자의\" (white), then \"꿀팁 7가지\" (orange). - Short orange underline bar below headline. - Subtitle in gray: \"저장 필수. 하나씩 적용해보세요.\" - Huge empty top area (composition breathing room)."
+      "prompt": "COVER SLIDE for carousel titled \"Claude Code Guide\". Layout: - Orange pill chip label \"CLAUDE CODE GUIDE\" (thin border, glowing dot) at bottom-left. - Huge extra-bold Korean headline: \"해커톤 우승자의\" (white), then \"꿀팁 7가지\" (orange gradient). - Short orange gradient underline bar below headline. - Subtitle in gray: \"저장 필수. 하나씩 적용해보세요.\" - Huge outlined ghost number \"07\" in background top-right. - Bottom-right small pill chip \"SWIPE →\". - Huge empty top area (composition breathing room)."
     },
     {
       "n": 2,
       "role": "TIP 01 - CLAUDE.md",
-      "prompt": "TIP 01 slide. - Top-left small orange label \"TIP 01\". - Korean headline (white + \"CLAUDE.md\" in orange): \"프로젝트 루트에 CLAUDE.md 하나면 응답이 달라진다\". - Middle: ASCII-art style folder tree in monospace font highlighting CLAUDE.md in orange. - Bottom tags in gray: \"기술 스택   코딩 컨벤션   빌드 명령어\"."
+      "prompt": "TIP 01 slide. - Top-left orange pill chip label \"TIP 01\". - Ghost outlined number \"01\" in background top-right. - Korean headline (white + \"CLAUDE.md\" in orange): \"프로젝트 루트에 CLAUDE.md 하나면 응답이 달라진다\". - Middle: ASCII-art style folder tree in monospace font highlighting CLAUDE.md in orange. - Bottom tags in gray: \"기술 스택   코딩 컨벤션   빌드 명령어\"."
     },
     {
       "n": 3,
@@ -45,7 +45,7 @@
     {
       "n": 9,
       "role": "Outro",
-      "prompt": "OUTRO / closing slide. Vertically centered, left-aligned: - Small orange uppercase label \"SAVE & SHARE\". - Large bold Korean headline: \"하나씩 적용하면 체감이 확 됩니다\" (with \"확\" in large orange). - Short orange underline bar. - Gray subtitle: \"저장해두고 하나씩 써보세요.\" Most of canvas empty dark space (premium editorial breathing room)."
+      "prompt": "OUTRO / closing slide. Vertically centered, left-aligned: - Orange pill chip label \"SAVE & SHARE\". - Large extra-bold Korean headline: \"하나씩 적용하면 체감이 확 됩니다\" (with \"확\" in large orange gradient). - Short orange gradient underline bar. - Gray subtitle: \"지금 저장해두면 필요할 때 바로 씁니다.\" - ONE orange gradient pill CTA button with bookmark icon: \"이 캐러셀 저장하기\". - Soft centered warm glow, ghost word \"SAVE\" outlined in background bottom-right. Most of canvas empty dark space (premium editorial breathing room)."
     }
   ]
 }

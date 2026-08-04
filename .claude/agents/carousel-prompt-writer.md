@@ -25,7 +25,7 @@ tools: Read, Write, Grep
 ## 사전 로드 (생략 금지)
 
 1. `brief.json` — 9장 outline
-2. `knowledge/brand-facts.md` — 디자인 DNA (`#131316` / `#CF5C3F` / Pretendard)
+2. `knowledge/brand-facts.md` — 디자인 DNA (`#0B0B0E` / `#CF5C3F`→`#F0956B` 그라디언트 / Pretendard)
 3. `knowledge/patterns/carousel-structure.md` — 9장 역할 공식 + Cover/본문/Outro 규칙
 4. `templates/slides.example.json` — 스키마 참조
 

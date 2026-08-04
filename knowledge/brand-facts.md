@@ -40,14 +40,17 @@
 
 ## 디자인 DNA (교체 권장)
 
-기본값(예시)은 tech/dark 스타일. 브랜드 톤에 맞게 전면 교체 가능:
+기본값(예시)은 tech/dark 에디토리얼 스타일 (v4). 브랜드 톤에 맞게 전면 교체 가능:
 
-- **배경**: `#131316` (near-black) `← 본인 컬러로`
-- **메인 액센트**: `#CF5C3F` (warm orange) `← 본인 컬러로`
+- **배경**: `#0B0B0E` (deep black) + 액센트 radial glow 1개 + 필름 그레인 오버레이 `← 본인 컬러로`
+- **메인 액센트**: `#CF5C3F` (warm orange), 밝은 틴트 `#F0956B`/`#E98A63` 와 그라디언트로 사용 `← 본인 컬러로`
+- **액센트 그라디언트**: `linear-gradient(115deg,#F0956B 10%,#CF5C3F 85%)` (헤드라인 키워드/진행 바/CTA)
 - **메인 텍스트**: `#FFFFFF` (pure white)
-- **서브 텍스트**: `rgba(255,255,255,0.4)` (white 40%)
-- **폰트**: Pretendard-like Korean sans-serif / bold headlines + monospace for code
-- **레이아웃 철학**: 여백 크게, 좌측 정렬, magazine feel
+- **서브 텍스트**: `rgba(255,255,255,0.45)` / 캡션 `rgba(255,255,255,0.35)`
+- **헤어라인/카드**: `border: rgba(255,255,255,0.09)` + `background: rgba(255,255,255,0.035)`, radius 24px
+- **폰트**: Pretendard-like Korean sans-serif / 대형 bold 헤드라인 (Cover 96px/900, 본문 56px/800, 자간 -0.025em) + monospace 는 코드·숫자 전용 (한글 금지)
+- **시그니처 요소**: 필 라벨 칩, 배경 고스트 아웃라인 넘버, 상단 진행 바, 하단 푸터(브랜드 + 페이지 번호)
+- **레이아웃 철학**: 여백 크게, 좌측 정렬, 트렌디 매거진 에디토리얼 feel
 - **해상도**: **1080×1350 고정** (인스타 캐러셀 4:5, 바꾸지 말 것)
 
 > 디자인 DNA는 `templates/slides.*.json` 의 `common_style` 필드에도 **동일한 값**으로 반영되어야 9장이 통일됩니다.

@@ -5,20 +5,66 @@
 <style>
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
   *{margin:0;padding:0;box-sizing:border-box}
-  body{width:1080px;height:1350px;background:#131316;font-family:'Pretendard Variable',sans-serif;color:#fff;overflow:hidden;position:relative}
+  body{width:1080px;height:1350px;background:#0B0B0E;font-family:'Pretendard Variable',sans-serif;color:#fff;overflow:hidden;position:relative}
   .mono{font-family:'SF Mono','Consolas','Courier New',monospace}
+  .glow{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(207,92,63,0.13) 0%,rgba(207,92,63,0) 62%);pointer-events:none}
+  .grain{position:absolute;inset:0;opacity:.4;mix-blend-mode:overlay;pointer-events:none;z-index:6;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
+  .progress{position:absolute;top:0;left:0;height:5px;background:linear-gradient(90deg,#F0956B,#CF5C3F);z-index:5}
+  .pill{display:inline-flex;align-items:center;gap:14px;padding:15px 30px;border:1.5px solid rgba(207,92,63,0.55);border-radius:999px;background:rgba(207,92,63,0.09);font-size:20px;font-weight:700;letter-spacing:0.16em;color:#E98A63}
+  .pill i{width:9px;height:9px;border-radius:50%;background:#CF5C3F;box-shadow:0 0 12px rgba(207,92,63,0.9)}
+  .ghost{position:absolute;font-weight:800;line-height:.8;letter-spacing:-0.04em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,0.07);pointer-events:none;z-index:0}
+  .footer{position:absolute;bottom:52px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:center;z-index:4}
+  .footer .brand{font-size:17px;font-weight:700;letter-spacing:0.22em;color:rgba(255,255,255,0.25)}
+  .footer .page{font-size:19px;letter-spacing:0.1em;color:rgba(255,255,255,0.3)}
+  .footer .page b{color:#E98A63;font-weight:700}
+  .grad{background:linear-gradient(115deg,#F0956B 10%,#CF5C3F 85%);-webkit-background-clip:text;background-clip:text;color:transparent}
 </style>
 </head>
 <body>
-  <div style="position:absolute;top:88px;left:80px"><div style="font-size:21px;font-weight:600;letter-spacing:0.13em;color:#CF5C3F;margin-bottom:32px">TIP 06</div></div>
-  <div style="position:absolute;top:180px;left:80px;right:80px;font-size:46px;font-weight:700;line-height:1.32">나만의<br/><span style="color:#CF5C3F">슬래시 커맨드</span></div>
-  <div style="position:absolute;top:420px;left:72px;right:72px;background:rgba(255,255,255,0.04);border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 20px 60px rgba(0,0,0,0.5)">
-    <div style="padding:24px 32px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:16px"><span style="font-size:26px;color:rgba(255,255,255,0.35)">/</span><span style="font-size:22px;color:rgba(255,255,255,0.35)">명령어 검색...</span></div>
-    <div style="padding:20px 32px;background:rgba(207,92,63,0.1);border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:baseline;gap:24px"><span class="mono" style="font-size:22px;font-weight:600;color:#CF5C3F;min-width:160px">/review</span><span style="font-size:20px;color:rgba(255,255,255,0.45)">코드 리뷰 후 개선점 정리</span></div>
-    <div style="padding:20px 32px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:baseline;gap:24px"><span class="mono" style="font-size:22px;font-weight:600;color:rgba(255,255,255,0.6);min-width:160px">/test</span><span style="font-size:20px;color:rgba(255,255,255,0.45)">테스트 코드 자동 생성</span></div>
-    <div style="padding:20px 32px;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:baseline;gap:24px"><span class="mono" style="font-size:22px;font-weight:600;color:rgba(255,255,255,0.6);min-width:160px">/refactor</span><span style="font-size:20px;color:rgba(255,255,255,0.45)">리팩토링 계획 수립</span></div>
-    <div style="padding:20px 32px;display:flex;align-items:baseline;gap:24px"><span class="mono" style="font-size:22px;font-weight:600;color:rgba(255,255,255,0.6);min-width:160px">/doc</span><span style="font-size:20px;color:rgba(255,255,255,0.45)">README + JSDoc 작성</span></div>
+  <div class="progress" style="width:840px"></div>
+  <div class="glow" style="top:-300px;right:-300px"></div>
+  <div class="ghost" style="top:34px;right:-14px;font-size:380px">06</div>
+
+  <div style="position:absolute;top:84px;left:80px;z-index:2"><div class="pill"><i></i>TIP 06</div></div>
+
+  <div style="position:absolute;top:210px;left:80px;right:80px;font-size:56px;font-weight:800;line-height:1.28;letter-spacing:-0.025em;word-break:keep-all;z-index:2">
+    나만의<br/><span class="grad">슬래시 커맨드</span>
   </div>
-  <div style="position:absolute;bottom:120px;left:80px"><div class="mono" style="font-size:20px;color:rgba(255,255,255,0.35);line-height:2">.claude/commands/<span style="color:#CF5C3F">review.md</span></div><div style="font-size:20px;color:rgba(255,255,255,0.25);margin-top:8px">프롬프트를 .md 파일로 저장하면 끝</div></div>
+
+  <!-- 커맨드 팔레트 -->
+  <div style="position:absolute;top:500px;left:76px;right:76px;background:#131318;border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,0.1);box-shadow:0 30px 80px rgba(0,0,0,0.6);z-index:2">
+    <div style="padding:26px 34px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;gap:18px">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.9-4.9"/></svg>
+      <span style="font-size:22px;color:rgba(255,255,255,0.35)">명령어 검색...</span>
+    </div>
+    <div style="padding:22px 34px;background:rgba(207,92,63,0.1);border-left:4px solid #CF5C3F;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:baseline;gap:26px">
+      <span class="mono" style="font-size:23px;font-weight:700;color:#E98A63;min-width:170px">/review</span>
+      <span style="font-size:20px;color:rgba(255,255,255,0.5)">코드 리뷰 후 개선점 정리</span>
+      <span class="mono" style="margin-left:auto;font-size:16px;color:rgba(255,255,255,0.25)">↵</span>
+    </div>
+    <div style="padding:22px 34px;border-left:4px solid transparent;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:baseline;gap:26px">
+      <span class="mono" style="font-size:23px;font-weight:600;color:rgba(255,255,255,0.6);min-width:170px">/test</span>
+      <span style="font-size:20px;color:rgba(255,255,255,0.45)">테스트 코드 자동 생성</span>
+    </div>
+    <div style="padding:22px 34px;border-left:4px solid transparent;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:baseline;gap:26px">
+      <span class="mono" style="font-size:23px;font-weight:600;color:rgba(255,255,255,0.6);min-width:170px">/refactor</span>
+      <span style="font-size:20px;color:rgba(255,255,255,0.45)">리팩토링 계획 수립</span>
+    </div>
+    <div style="padding:22px 34px;border-left:4px solid transparent;display:flex;align-items:baseline;gap:26px">
+      <span class="mono" style="font-size:23px;font-weight:600;color:rgba(255,255,255,0.6);min-width:170px">/doc</span>
+      <span style="font-size:20px;color:rgba(255,255,255,0.45)">README + JSDoc 작성</span>
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:220px;left:80px;z-index:2">
+    <div class="mono" style="font-size:21px;color:rgba(255,255,255,0.35)">.claude/commands/<span class="grad" style="font-weight:700">review.md</span></div>
+  </div>
+  <div style="position:absolute;bottom:158px;left:80px;font-size:21px;color:rgba(255,255,255,0.35);z-index:2">프롬프트를 .md 파일로 저장하면 끝</div>
+
+  <div class="footer">
+    <div class="brand">CLAUDE CODE GUIDE</div>
+    <div class="page mono"><b>07</b> / 09</div>
+  </div>
+  <div class="grain"></div>
 </body>
 </html>

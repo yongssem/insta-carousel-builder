@@ -31,7 +31,7 @@ AI 이미지 도구로 인스타 캐러셀을 만들면 한글이 깨지고 AI �
 - ✅ `.env` 에 Gemini API 키 하나 + `npx` 한 줄이면 재현 가능
 - ✅ `templates/slides.example.json` 의 프롬프트 9개만 수정하면 본인 콘텐츠로 교체
 - ✅ Claude Code `.claude/agents/` + `.claude/commands/` 하네스로 품질 검증까지 자동화
-- ✅ 디자인 DNA(`#131316` + `#CF5C3F` + Pretendard) 유지된 채로 주제만 바뀜
+- ✅ 디자인 DNA(`#0B0B0E` + `#CF5C3F` 그라디언트 + Pretendard) 유지된 채로 주제만 바뀜
 
 ---
 

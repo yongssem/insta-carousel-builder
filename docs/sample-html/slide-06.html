@@ -5,17 +5,65 @@
 <style>
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
   *{margin:0;padding:0;box-sizing:border-box}
-  body{width:1080px;height:1350px;background:#131316;font-family:'Pretendard Variable',sans-serif;color:#fff;overflow:hidden;position:relative}
+  body{width:1080px;height:1350px;background:#0B0B0E;font-family:'Pretendard Variable',sans-serif;color:#fff;overflow:hidden;position:relative}
+  .mono{font-family:'SF Mono','Consolas','Courier New',monospace}
+  .glow{position:absolute;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(207,92,63,0.13) 0%,rgba(207,92,63,0) 62%);pointer-events:none}
+  .grain{position:absolute;inset:0;opacity:.4;mix-blend-mode:overlay;pointer-events:none;z-index:6;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E")}
+  .progress{position:absolute;top:0;left:0;height:5px;background:linear-gradient(90deg,#F0956B,#CF5C3F);z-index:5}
+  .pill{display:inline-flex;align-items:center;gap:14px;padding:15px 30px;border:1.5px solid rgba(207,92,63,0.55);border-radius:999px;background:rgba(207,92,63,0.09);font-size:20px;font-weight:700;letter-spacing:0.16em;color:#E98A63}
+  .pill i{width:9px;height:9px;border-radius:50%;background:#CF5C3F;box-shadow:0 0 12px rgba(207,92,63,0.9)}
+  .ghost{position:absolute;font-weight:800;line-height:.8;letter-spacing:-0.04em;color:transparent;-webkit-text-stroke:2px rgba(255,255,255,0.07);pointer-events:none;z-index:0}
+  .footer{position:absolute;bottom:52px;left:80px;right:80px;display:flex;justify-content:space-between;align-items:center;z-index:4}
+  .footer .brand{font-size:17px;font-weight:700;letter-spacing:0.22em;color:rgba(255,255,255,0.25)}
+  .footer .page{font-size:19px;letter-spacing:0.1em;color:rgba(255,255,255,0.3)}
+  .footer .page b{color:#E98A63;font-weight:700}
+  .grad{background:linear-gradient(115deg,#F0956B 10%,#CF5C3F 85%);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .card{background:rgba(255,255,255,0.035);border:1px solid rgba(255,255,255,0.09);border-radius:24px}
 </style>
 </head>
 <body>
-  <div style="position:absolute;top:88px;left:80px"><div style="font-size:21px;font-weight:600;letter-spacing:0.13em;color:#CF5C3F;margin-bottom:32px">TIP 05</div></div>
-  <div style="position:absolute;top:180px;left:80px;right:80px;font-size:46px;font-weight:700;line-height:1.32"><span style="color:#CF5C3F">Worktree</span>로<br/>안전하게 실험해라</div>
-  <div style="position:absolute;top:440px;left:80px;right:80px">
-    <div style="display:flex;align-items:flex-start;gap:32px;margin-bottom:64px"><div style="font-size:64px;font-weight:200;color:rgba(207,92,63,0.6);line-height:1;margin-top:-8px">&#10005;</div><div><div style="font-size:24px;color:rgba(255,255,255,0.55);line-height:1.7">main에서 직접 실험</div><div style="margin-top:12px;font-size:18px;color:rgba(207,92,63,0.6)">→ 망하면 되돌리기 힘듦</div></div></div>
-    <div style="width:100%;height:1px;background:rgba(255,255,255,0.1);margin-bottom:64px"></div>
-    <div style="display:flex;align-items:flex-start;gap:32px"><div style="font-size:64px;font-weight:200;color:#CF5C3F;line-height:1;margin-top:-8px;opacity:0.85">→</div><div><div style="font-size:24px;color:rgba(255,255,255,0.7);line-height:1.7">Worktree로 격리된 복사본</div><div style="font-size:24px;color:rgba(255,255,255,0.7);line-height:1.7;margin-top:8px"><span style="color:rgba(255,255,255,0.3)">성공 →</span> merge</div><div style="font-size:24px;color:rgba(255,255,255,0.7);line-height:1.7;margin-top:8px"><span style="color:rgba(255,255,255,0.3)">실패 →</span> 삭제</div><div style="margin-top:16px;font-size:18px;color:rgba(91,200,106,0.7)">→ 리스크 제로</div></div></div>
+  <div class="progress" style="width:720px"></div>
+  <div class="glow" style="top:-300px;right:-300px"></div>
+  <div class="ghost" style="top:34px;right:-14px;font-size:380px">05</div>
+
+  <div style="position:absolute;top:84px;left:80px;z-index:2"><div class="pill"><i></i>TIP 05</div></div>
+
+  <div style="position:absolute;top:210px;left:80px;right:80px;font-size:56px;font-weight:800;line-height:1.28;letter-spacing:-0.025em;word-break:keep-all;z-index:2">
+    <span class="grad">Worktree</span>로<br/>안전하게 실험해라
   </div>
-  <div style="position:absolute;bottom:88px;left:80px;font-size:20px;color:rgba(255,255,255,0.25)">원본은 그대로, 실험은 자유롭게</div>
+
+  <!-- Bad -->
+  <div class="card" style="position:absolute;top:510px;left:80px;right:80px;padding:40px 48px;display:flex;align-items:center;gap:36px;z-index:2">
+    <div style="width:68px;height:68px;border-radius:50%;background:rgba(255,95,87,0.09);border:1.5px solid rgba(255,95,87,0.4);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="rgba(255,95,87,0.85)" stroke-width="2.4" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg>
+    </div>
+    <div>
+      <div style="font-size:26px;font-weight:600;color:rgba(255,255,255,0.75)">main에서 직접 실험</div>
+      <div style="margin-top:10px;font-size:20px;color:rgba(255,95,87,0.7)">망하면 되돌리기 힘듦</div>
+    </div>
+  </div>
+
+  <!-- Good -->
+  <div class="card" style="position:absolute;top:730px;left:80px;right:80px;padding:44px 48px;display:flex;align-items:flex-start;gap:36px;border-color:rgba(207,92,63,0.45);background:rgba(207,92,63,0.06);z-index:2">
+    <div style="width:68px;height:68px;border-radius:50%;background:rgba(207,92,63,0.14);border:1.5px solid rgba(207,92,63,0.6);display:flex;align-items:center;justify-content:center;flex-shrink:0">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#E98A63" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v12"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+    </div>
+    <div>
+      <div style="font-size:26px;font-weight:700;color:rgba(255,255,255,0.9)">Worktree로 격리된 복사본</div>
+      <div style="margin-top:18px;font-size:22px;color:rgba(255,255,255,0.65);line-height:1.75">
+        <span style="color:rgba(255,255,255,0.35)">성공 →</span> <span class="mono">merge</span><br/>
+        <span style="color:rgba(255,255,255,0.35)">실패 →</span> 삭제
+      </div>
+      <div style="margin-top:16px;font-size:20px;font-weight:600;color:rgba(91,200,106,0.8)">리스크 제로</div>
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:158px;left:80px;font-size:21px;color:rgba(255,255,255,0.35);z-index:2">원본은 그대로, 실험은 자유롭게</div>
+
+  <div class="footer">
+    <div class="brand">CLAUDE CODE GUIDE</div>
+    <div class="page mono"><b>06</b> / 09</div>
+  </div>
+  <div class="grain"></div>
 </body>
 </html>
