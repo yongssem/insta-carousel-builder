@@ -7,6 +7,24 @@
 
 ## 즉시 실행 원칙
 
+### ⭐ 기본 산출 형태 = 움직이는 캐러셀 (v5 모션)
+
+캐러셀 요청이 오면 **기본으로 모션 캐러셀**을 만듭니다. 정적 PNG 만 원한다고
+명시한 경우에만 `--skip-video` 를 씁니다.
+
+```bash
+# 슬라이드 데이터 JSON 작성 → templates/slides.v5.<topic>.json
+node scripts/make-carousel.mjs --data templates/slides.v5.<topic>.json --topic <topic>
+```
+
+한 번에 PNG 9장 + MP4 9장 + 엔드카드 + `output/<topic>/upload/` 조립까지 끝납니다.
+**단계별로 따로 돌리지 마세요** — 재인코딩이 끝나기 전에 이전 산출물을 묶는
+사고가 실제로 났습니다. 이 스크립트는 전부 동기 실행 후 최신성까지 검증합니다.
+
+업로드 폴더 구성: `01-cover.png` (정적, 피드 썸네일) + `02~09.mp4` + `10-endcard.png`
+
+---
+
 사용자가 아래처럼 요청하면 `/carousel-new <주제>` 파이프라인을 실행합니다:
 
 - "바이브코딩으로 캐러셀 만들어줘"
