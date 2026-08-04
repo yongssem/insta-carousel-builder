@@ -71,8 +71,8 @@ const CSS = (T) => `
      word-break:keep-all;margin-top:18px}
   h1 .hl{color:${T.accent}}
   .rule{height:5px;background:${T.accent};border-radius:3px;margin-top:26px}
-  .sub{margin-top:24px;font-size:30px;font-weight:700;color:${T.accent};letter-spacing:-0.02em}
-  .note{margin-top:14px;font-size:24px;color:${T.muted};letter-spacing:-0.01em;white-space:pre-line}
+  .sub{margin-top:26px;font-size:36px;font-weight:700;color:${T.accent};letter-spacing:-0.025em;line-height:1.35}
+  .note{margin-top:16px;font-size:29px;color:${T.muted};letter-spacing:-0.015em;line-height:1.5;white-space:pre-line}
 
   /* 캐릭터 — 배경이 크림이라 누끼 없이 얹고 가장자리만 부드럽게 지운다 */
   .char{position:absolute;z-index:1;pointer-events:none;
@@ -80,8 +80,8 @@ const CSS = (T) => `
         mask-image:radial-gradient(circle at 50% 48%, #000 58%, rgba(0,0,0,0) 76%)}
 
   /* 하단 */
-  .swipe{bottom:150px;font-size:26px;font-weight:700;color:${T.accent};z-index:2}
-  .swipe i{font-size:27px}
+  .swipe{bottom:150px;font-size:30px;font-weight:700;color:${T.accent};z-index:2}
+  .swipe i{font-size:31px}
   .foot{bottom:64px;display:flex;justify-content:space-between;align-items:baseline;z-index:2}
   .foot .h{font-size:27px;font-weight:800;letter-spacing:-0.01em}
   /* 핸들 옆 표시이름 — 같은 줄, 위계만 낮춤 */
@@ -91,20 +91,29 @@ const CSS = (T) => `
   /* ── 시각 요소 ───────────────────────────── */
   .card{background:${T.card};border:1.5px solid ${T.line};border-radius:22px}
 
-  .barrow{display:flex;align-items:center;gap:22px;margin-bottom:22px}
-  .barrow .k{font-size:23px;font-weight:700;min-width:180px;letter-spacing:-0.01em}
-  .track{flex:1;height:44px;border-radius:22px;background:${T.track};overflow:hidden;position:relative}
-  .fill{height:100%;width:var(--w);border-radius:22px;display:flex;align-items:center;
-        padding-left:22px;font-size:22px;font-weight:800;color:#fff;letter-spacing:.02em;
-        white-space:nowrap;overflow:hidden}
+  /* 라벨을 막대 위 한 줄로 올린다.
+     같은 줄에 두면 라벨 길이에 따라 트랙 폭이 행마다 달라져(실측 417 vs 478px)
+     두 막대를 나란히 비교할 수 없게 된다. 위로 올리면 트랙이 항상 전폭이다. */
+  .barrow{margin-bottom:32px}
+  .brhead{display:flex;justify-content:space-between;align-items:baseline;
+          gap:20px;margin-bottom:13px}
+  .barrow .k{font-size:29px;font-weight:700;letter-spacing:-0.015em}
+  .barrow .v{font-size:29px;font-weight:800;letter-spacing:-0.015em;
+             white-space:nowrap;text-align:right}
+  .barrow .v.muted{color:${T.muted}}
+  .barrow .v.accent{color:${T.accent}}
+  .track{display:block;width:100%;height:56px;border-radius:28px;
+         background:${T.track};overflow:hidden;position:relative}
+  /* span 이므로 display:block 필수 — inline 이면 width/height 가 무시된다 */
+  .fill{display:block;height:100%;width:var(--w);border-radius:28px}
 
   .statwrap{display:flex;gap:22px}
-  .stat{flex:1;padding:34px 30px}
-  .stat .t{font-size:24px;font-weight:800;letter-spacing:.04em;color:${T.muted}}
-  .stat .v{font-size:66px;font-weight:800;letter-spacing:-0.04em;margin:10px 0 6px}
-  .stat .d{font-size:21px;color:${T.muted};line-height:1.5;letter-spacing:-0.01em;white-space:pre-line}
+  .stat{flex:1;padding:38px 34px}
+  .stat .t{font-size:27px;font-weight:800;letter-spacing:.03em;color:${T.muted}}
+  .stat .v{font-size:74px;font-weight:800;letter-spacing:-0.045em;margin:12px 0 8px}
+  .stat .d{font-size:25px;color:${T.muted};line-height:1.5;letter-spacing:-0.015em;white-space:pre-line}
 
-  .src{font-size:21px;font-weight:600;color:${T.muted};letter-spacing:.04em;
+  .src{font-size:24px;font-weight:600;color:${T.muted};letter-spacing:.03em;
        font-variant-numeric:tabular-nums}
 
   .dots{display:grid;grid-template-columns:repeat(10,1fr);gap:13px}
@@ -112,14 +121,14 @@ const CSS = (T) => `
   .dots i.on{background:${T.accent}}
 
   /* 태그 목록 — 항목 나열용 (데이터가 아니라 범위를 보여줄 때) */
-  .chips{display:flex;flex-wrap:wrap;gap:16px;max-width:820px}
-  .chips span{padding:16px 28px;border-radius:999px;background:${T.card};
-              border:1.5px solid ${T.line};font-size:25px;font-weight:700;
-              letter-spacing:-0.01em}
+  .chips{display:flex;flex-wrap:wrap;gap:18px;max-width:880px}
+  .chips span{padding:19px 32px;border-radius:999px;background:${T.card};
+              border:1.5px solid ${T.line};font-size:29px;font-weight:700;
+              letter-spacing:-0.015em}
   .chips span.on{background:${T.accent};border-color:${T.accent};color:#fff}
 
   .flow{display:flex;align-items:center;gap:26px}
-  .chip{padding:20px 30px;border-radius:999px;font-size:25px;font-weight:800;letter-spacing:-0.01em}
+  .chip{padding:23px 34px;border-radius:999px;font-size:29px;font-weight:800;letter-spacing:-0.015em}
   .chip.off{background:${T.track};color:${T.muted}}
   .chip.on{background:${T.accent};color:#fff}
 
@@ -148,6 +157,7 @@ const CSS = (T) => `
   body.anim .barrow:nth-of-type(1){animation-delay:.8s}
   body.anim .barrow:nth-of-type(2){animation-delay:.95s}
   body.anim .fill{animation:growW 1.1s cubic-bezier(.22,1,.36,1) .9s both}
+  body.anim .brhead{animation:fadeUp .55s cubic-bezier(.22,1,.36,1) .82s both}
   body.anim .barrow:nth-of-type(2) .fill{animation-delay:1.05s}
   body.anim .stat{animation:fadeUp .75s cubic-bezier(.22,1,.36,1) both}
   body.anim .stat:nth-child(1){animation-delay:.85s}
@@ -176,10 +186,13 @@ function visual(v, T) {
       ${v.rows
         .map(
           (r) => `<div class="barrow">
-        <span class="k">${esc(r.k)}</span>
+        <div class="brhead">
+          <span class="k">${esc(r.k)}</span>
+          <span class="v ${r.tone === 'muted' ? 'muted' : 'accent'}">${esc(r.v)}</span>
+        </div>
         <span class="track"><span class="fill" style="--w:${r.pct}%;background:${
             r.tone === 'muted' ? T.inkSoft : T.accent
-          }">${esc(r.v)}</span></span>
+          }"></span></span>
       </div>`
         )
         .join('\n')}
