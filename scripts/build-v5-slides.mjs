@@ -92,8 +92,9 @@ const CSS = (T) => `
   .barrow{display:flex;align-items:center;gap:22px;margin-bottom:22px}
   .barrow .k{font-size:23px;font-weight:700;min-width:180px;letter-spacing:-0.01em}
   .track{flex:1;height:44px;border-radius:22px;background:${T.track};overflow:hidden;position:relative}
-  .fill{height:100%;border-radius:22px;display:flex;align-items:center;padding-left:22px;
-        font-size:22px;font-weight:800;color:#fff;letter-spacing:.02em}
+  .fill{height:100%;width:var(--w);border-radius:22px;display:flex;align-items:center;
+        padding-left:22px;font-size:22px;font-weight:800;color:#fff;letter-spacing:.02em;
+        white-space:nowrap;overflow:hidden}
 
   .statwrap{display:flex;gap:22px}
   .stat{flex:1;padding:34px 30px}
@@ -112,6 +113,49 @@ const CSS = (T) => `
   .chip{padding:20px 30px;border-radius:999px;font-size:25px;font-weight:800;letter-spacing:-0.01em}
   .chip.off{background:${T.track};color:${T.muted}}
   .chip.on{background:${T.accent};color:#fff}
+
+  /* ── 애니메이션 (body.anim 일 때만) ─────────────────
+     전부 paused 로 두고 Web Animations API 로 시각을 강제 지정해
+     프레임 단위 캡처가 결정적(deterministic)이 되게 한다. */
+  @keyframes fadeUp{from{opacity:0;transform:translateY(38px)}to{opacity:1;transform:none}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes growX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+  @keyframes growW{from{width:0}to{width:var(--w)}}
+  @keyframes popIn{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+  @keyframes charIn{from{opacity:0;transform:translateY(60px) scale(.94)}to{opacity:1;transform:none}}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+
+  body.anim .head,
+  body.anim .foot,
+  body.anim .ghost{animation:fadeIn .7s ease-out both}
+  body.anim .ghost{animation-delay:.25s}
+  body.anim .label{animation:fadeUp .65s cubic-bezier(.22,1,.36,1) both}
+  body.anim h1{animation:fadeUp .8s cubic-bezier(.22,1,.36,1) .14s both}
+  body.anim .rule{transform-origin:left center;animation:growX .65s cubic-bezier(.22,1,.36,1) .42s both}
+  body.anim .sub{animation:fadeUp .7s cubic-bezier(.22,1,.36,1) .56s both}
+  body.anim .note{animation:fadeUp .7s cubic-bezier(.22,1,.36,1) .68s both}
+  body.anim .swipe{animation:fadeUp .7s cubic-bezier(.22,1,.36,1) 1.15s both}
+
+  body.anim .barrow{animation:fadeIn .5s ease-out both}
+  body.anim .barrow:nth-of-type(1){animation-delay:.8s}
+  body.anim .barrow:nth-of-type(2){animation-delay:.95s}
+  body.anim .fill{animation:growW 1.1s cubic-bezier(.22,1,.36,1) .9s both}
+  body.anim .barrow:nth-of-type(2) .fill{animation-delay:1.05s}
+  body.anim .stat{animation:fadeUp .75s cubic-bezier(.22,1,.36,1) both}
+  body.anim .stat:nth-child(1){animation-delay:.85s}
+  body.anim .stat:nth-child(2){animation-delay:1s}
+  body.anim .dots i{animation:popIn .5s cubic-bezier(.34,1.56,.64,1) both}
+  body.anim .chip,
+  body.anim .flow svg{animation:fadeUp .7s cubic-bezier(.22,1,.36,1) both}
+  body.anim .flow .chip.off{animation-delay:.85s}
+  body.anim .flow svg{animation-delay:1s}
+  body.anim .flow .chip.on{animation-delay:1.15s}
+  body.anim .src{animation:fadeIn .6s ease-out 1.5s both}
+
+  body.anim .char{animation:charIn .9s cubic-bezier(.22,1,.36,1) .5s both}
+  /* 요정은 등장 후 계속 떠 있게 (감속 없이 루프) */
+  body.anim .char.float{animation:charIn .9s cubic-bezier(.22,1,.36,1) .5s both,
+                                  floaty 2.6s ease-in-out 1.4s infinite}
 `;
 
 function visual(v, T) {
@@ -122,7 +166,7 @@ function visual(v, T) {
         .map(
           (r) => `<div class="barrow">
         <span class="k">${esc(r.k)}</span>
-        <span class="track"><span class="fill" style="width:${r.pct}%;background:${
+        <span class="track"><span class="fill" style="--w:${r.pct}%;background:${
             r.tone === 'muted' ? T.inkSoft : T.accent
           }">${esc(r.v)}</span></span>
       </div>`
@@ -152,7 +196,8 @@ function visual(v, T) {
     return `<div class="pad" style="top:${v.top}px">
       <div class="dots" style="max-width:${v.width ?? 620}px">${Array.from(
         { length: n },
-        (_, i) => `<i class="${i < v.on ? 'on' : ''}"></i>`
+        (_, i) =>
+          `<i class="${i < v.on ? 'on' : ''}" style="animation-delay:${(0.85 + i * 0.022).toFixed(3)}s"></i>`
       ).join('')}</div>
       <div class="src" style="margin-top:24px">${esc(v.src)}</div>
     </div>`;
@@ -170,9 +215,11 @@ function visual(v, T) {
   return '';
 }
 
-function slideHtml(s, meta, T, charRel) {
+function slideHtml(s, meta, T, charRel, anim) {
   const ch = s.character
-    ? `<img class="char" src="${charRel}/${s.character}.png" style="${s.charStyle}">`
+    ? `<img class="char${s.character === 'fairy' ? ' float' : ''}" src="${charRel}/${
+        s.character
+      }.png" style="${s.charStyle}">`
     : '';
   return `<!DOCTYPE html>
 <html lang="ko">
@@ -180,7 +227,7 @@ function slideHtml(s, meta, T, charRel) {
 <meta charset="UTF-8">
 <style>${CSS(T)}</style>
 </head>
-<body>
+<body class="${anim ? 'anim' : ''}">
   <div class="pad head">
     <span>— ${esc(meta.diary)}</span>
     <span class="rt">${String(s.n).padStart(2, '0')} — ${String(meta.total).padStart(2, '0')}</span>
@@ -226,7 +273,8 @@ function main() {
   const T = data.theme;
   const meta = data.meta;
 
-  const outDir = join(REPO_ROOT, 'output', topic, 'slides');
+  const anim = args.animate !== undefined;
+  const outDir = join(REPO_ROOT, 'output', topic, anim ? 'slides-anim' : 'slides');
   mkdirSync(outDir, { recursive: true });
 
   const charDir = join(REPO_ROOT, 'assets', 'characters');
@@ -244,10 +292,14 @@ function main() {
 
   for (const s of data.slides) {
     const f = join(outDir, `slide-${String(s.n).padStart(2, '0')}.html`);
-    writeFileSync(f, slideHtml(s, meta, T, charRel));
+    writeFileSync(f, slideHtml(s, meta, T, charRel, anim));
   }
-  console.log(`✓ ${data.slides.length}장 HTML 생성 → ${outDir}`);
-  console.log(`\n다음: node scripts/html-carousel-gen.js --topic ${topic}\n`);
+  console.log(`✓ ${data.slides.length}장 ${anim ? '애니메이션 ' : ''}HTML 생성 → ${outDir}`);
+  console.log(
+    anim
+      ? `\n다음: node scripts/animate-slides.mjs --topic ${topic}\n`
+      : `\n다음: node scripts/html-carousel-gen.js --topic ${topic}\n`
+  );
 }
 
 main();

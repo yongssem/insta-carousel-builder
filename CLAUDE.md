@@ -50,6 +50,29 @@ node scripts/html-carousel-gen.js --topic <topic>
 `common_style` 에 `#F3EEE2` 고정). 다르면 사각형 자국이 보입니다.
 가장자리는 CSS radial mask 로 부드럽게 지웁니다.
 
+### 🎬 움직이는 캐러셀 (모션 슬라이드)
+
+인스타 캐러셀은 **사진과 동영상을 섞어** 올릴 수 있습니다(최대 20장).
+즉 "움직이는 캐러셀"은 별도 기능이 아니라 **각 장을 짧은 루프 MP4 로 만든 것**입니다.
+
+```bash
+node scripts/build-v5-slides.mjs --data <json> --topic <t> --animate 1
+node scripts/animate-slides.mjs --topic <t>          # → output/<t>/video/slide-NN.mp4
+```
+
+지켜야 할 것:
+
+| 항목 | 규칙 |
+|:---|:---|
+| **비율 통일** | 캐러셀 **첫 장의 비율이 전체에 강제 적용**됩니다. 9장 전부 1080×1350 |
+| **코덱** | H.264 + `yuv420p` + `+faststart`. ⚠️ Playwright 번들 ffmpeg 는 VP8/WebM 전용이라 **인스타 업로드 불가** → `pip install imageio-ffmpeg` |
+| **길이** | 3~4초 루프 권장 (캐러셀 1장 체류시간이 2~3초) |
+| **결정성** | Web Animations API 로 `currentTime` 을 직접 지정해 캡처 → 몇 번 돌려도 동일 결과 |
+| **정적본 병행** | 영상이 안 도는 환경 대비로 PNG 9장도 같이 뽑아둘 것 |
+
+애니메이션 CSS 는 `build-v5-slides.mjs` 안에 `body.anim` 스코프로 들어 있습니다.
+정적 빌드(`--animate` 없음)에는 적용되지 않습니다.
+
 **자동 판단 안 될 때 — CEO에게 1줄 질문**:
 > "🍌 나노바나나(Gemini, 빠른 실험) vs 🎨 HTML(정확/0원) 중 어느 엔진?"
 
