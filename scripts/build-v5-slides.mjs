@@ -72,7 +72,7 @@ const CSS = (T) => `
   h1 .hl{color:${T.accent}}
   .rule{height:5px;background:${T.accent};border-radius:3px;margin-top:26px}
   .sub{margin-top:24px;font-size:30px;font-weight:700;color:${T.accent};letter-spacing:-0.02em}
-  .note{margin-top:14px;font-size:24px;color:${T.muted};letter-spacing:-0.01em}
+  .note{margin-top:14px;font-size:24px;color:${T.muted};letter-spacing:-0.01em;white-space:pre-line}
 
   /* 캐릭터 — 배경이 크림이라 누끼 없이 얹고 가장자리만 부드럽게 지운다 */
   .char{position:absolute;z-index:1;pointer-events:none;
@@ -111,6 +111,13 @@ const CSS = (T) => `
   .dots i{aspect-ratio:1;border-radius:7px;background:${T.track};display:block}
   .dots i.on{background:${T.accent}}
 
+  /* 태그 목록 — 항목 나열용 (데이터가 아니라 범위를 보여줄 때) */
+  .chips{display:flex;flex-wrap:wrap;gap:16px;max-width:820px}
+  .chips span{padding:16px 28px;border-radius:999px;background:${T.card};
+              border:1.5px solid ${T.line};font-size:25px;font-weight:700;
+              letter-spacing:-0.01em}
+  .chips span.on{background:${T.accent};border-color:${T.accent};color:#fff}
+
   .flow{display:flex;align-items:center;gap:26px}
   .chip{padding:20px 30px;border-radius:999px;font-size:25px;font-weight:800;letter-spacing:-0.01em}
   .chip.off{background:${T.track};color:${T.muted}}
@@ -146,6 +153,7 @@ const CSS = (T) => `
   body.anim .stat:nth-child(1){animation-delay:.85s}
   body.anim .stat:nth-child(2){animation-delay:1s}
   body.anim .dots i{animation:popIn .5s cubic-bezier(.34,1.56,.64,1) both}
+  body.anim .chips span{animation:fadeUp .6s cubic-bezier(.22,1,.36,1) both}
   body.anim .chip,
   body.anim .flow svg{animation:fadeUp .7s cubic-bezier(.22,1,.36,1) both}
   body.anim .flow .chip.off{animation-delay:.85s}
@@ -203,6 +211,19 @@ function visual(v, T) {
           `<i class="${i < v.on ? 'on' : ''}" style="animation-delay:${(0.85 + i * 0.022).toFixed(3)}s"></i>`
       ).join('')}</div>
       <div class="src" style="margin-top:24px">${esc(v.src)}</div>
+    </div>`;
+  }
+  if (v.type === 'chips') {
+    return `<div class="pad" style="top:${v.top}px">
+      <div class="chips">${v.items
+        .map(
+          (it, i) =>
+            `<span class="${it.on ? 'on' : ''}" style="animation-delay:${(0.85 + i * 0.09).toFixed(
+              2
+            )}s">${esc(it.t ?? it)}</span>`
+        )
+        .join('')}</div>
+      ${v.src ? `<div class="src" style="margin-top:26px">${esc(v.src)}</div>` : ''}
     </div>`;
   }
   if (v.type === 'flow') {

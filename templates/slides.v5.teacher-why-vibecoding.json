@@ -1,0 +1,225 @@
+{
+  "_comment": "v5 웜 크림 에디토리얼 — '선생님에게 바이브코딩이 필요한 이유' 9장. 구조는 Before/After 대비(직전 편의 '통념 깨기'와 의도적으로 다르게). 수치는 brand-facts.md 의 검증분(18년차, 163개)만 사용하고 외부 통계는 쓰지 않음 — 이 주제는 통계보다 교실 장면이 설득력이 큼.",
+  "topic": "teacher-why-vibecoding",
+  "theme": {
+    "bg": "#F1E9DE",
+    "ink": "#1A1A1A",
+    "inkSoft": "#BCB2A4",
+    "accent": "#E1502A",
+    "muted": "#A0968A",
+    "card": "#EBE1D3",
+    "line": "#DCD1C1",
+    "track": "#E3D8C7"
+  },
+  "meta": {
+    "diary": "바이브용샘 diary EP.02",
+    "total": 9,
+    "handle": "@yongssam.dev",
+    "studio": "무궁무진클래스",
+    "name": "바이브용샘"
+  },
+  "slides": [
+    {
+      "n": 1,
+      "top": 150,
+      "label": "SCROLL STOPPER",
+      "h1": "선생님한테 필요한 건\n*코딩이 아닙니다*",
+      "ruleW": 600,
+      "sub": "필요한 건 '우리 반에 딱 맞는 앱' 하나.",
+      "note": "18년차 교사가 앱 163개를 만들며 알게 된 것.",
+      "character": "teacher",
+      "charStyle": "right:-4px;bottom:118px;width:660px",
+      "swipe": "지금 확인하기"
+    },
+    {
+      "n": 2,
+      "top": 150,
+      "label": "이유 01 · 시간",
+      "h1": "만들 엄두도 안 나던 게\n*쉬는 시간에 하나*",
+      "ruleW": 560,
+      "sub": "개발자를 찾을 필요가 없어졌습니다.",
+      "visual": {
+        "type": "bars",
+        "top": 570,
+        "rows": [
+          {
+            "k": "예전",
+            "pct": 92,
+            "v": "의뢰하고 몇 주 기다림",
+            "tone": "muted"
+          },
+          {
+            "k": "지금",
+            "pct": 26,
+            "v": "말로 설명하면 끝"
+          }
+        ],
+        "src": "막대는 걸리는 시간의 비유입니다"
+      },
+      "character": "dev",
+      "charStyle": "right:10px;bottom:128px;width:430px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 3,
+      "top": 150,
+      "label": "이유 02 · 맞춤",
+      "h1": "기성 앱은\n*우리 반을 모릅니다*",
+      "ruleW": 520,
+      "sub": "우리 반 이름, 우리 학교 시간표, 우리 반 규칙.",
+      "visual": {
+        "type": "stats",
+        "top": 560,
+        "items": [
+          {
+            "t": "기성 앱",
+            "v": "남의 반",
+            "d": "기능은 많은데\n정작 쓸 게 없음"
+          },
+          {
+            "t": "직접 만든 앱",
+            "v": "우리 반",
+            "d": "딱 필요한 것만\n딱 우리 방식대로",
+            "tone": "accent"
+          }
+        ],
+        "src": "교실마다 사정이 다릅니다"
+      },
+      "character": "scholar",
+      "charStyle": "right:8px;bottom:126px;width:420px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 4,
+      "top": 150,
+      "label": "이유 03 · 즉시",
+      "h1": "아이들 반응 보고\n*그 자리에서 고칩니다*",
+      "ruleW": 600,
+      "sub": "다음 시간에는 이미 바뀐 앱으로.",
+      "visual": {
+        "type": "flow",
+        "top": 600,
+        "from": "수업 중 반응 확인",
+        "to": "쉬는 시간에 수정",
+        "src": "고치는 데 결재도 견적서도 필요 없습니다"
+      },
+      "character": "teacher",
+      "charStyle": "right:8px;bottom:126px;width:420px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 5,
+      "top": 150,
+      "label": "이유 04 · 범위",
+      "h1": "수업만이\n*아닙니다*",
+      "ruleW": 420,
+      "sub": "평가도, 생활지도도, 학급 운영도.",
+      "note": "하루에 손 가는 일이 전부 대상입니다.",
+      "character": "maker",
+      "charStyle": "right:8px;bottom:126px;width:430px",
+      "swipe": "계속 보기",
+      "visual": {
+        "type": "chips",
+        "top": 600,
+        "items": [
+          {
+            "t": "자리 바꾸기"
+          },
+          {
+            "t": "모둠 편성"
+          },
+          {
+            "t": "발표 순서"
+          },
+          {
+            "t": "칭찬 기록"
+          },
+          {
+            "t": "학습 퀴즈"
+          },
+          {
+            "t": "타이머"
+          },
+          {
+            "t": "설문·투표"
+          },
+          {
+            "t": "우리 반 게임",
+            "on": true
+          }
+        ],
+        "src": "163개 중 실제로 가장 많이 쓰인 것들"
+      }
+    },
+    {
+      "n": 6,
+      "top": 150,
+      "label": "이유 05 · 학생",
+      "h1": "다음은\n*아이들 차례*입니다",
+      "ruleW": 460,
+      "sub": "쓰는 아이에서 만드는 아이로.",
+      "visual": {
+        "type": "flow",
+        "top": 590,
+        "from": "선생님이 만든 앱",
+        "to": "아이가 만든 앱",
+        "src": "가장 좋은 코딩 교육은 자기 것을 만들어 보는 것"
+      },
+      "character": "fairy",
+      "charStyle": "right:14px;bottom:134px;width:390px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 7,
+      "top": 150,
+      "label": "이유 06 · 공유",
+      "h1": "한 번 만들면\n*같이 씁니다*",
+      "ruleW": 460,
+      "sub": "옆 반, 옆 학교, 그리고 전국.",
+      "visual": {
+        "type": "stats",
+        "top": 560,
+        "items": [
+          {
+            "t": "지금까지 만든 앱",
+            "v": "163개",
+            "d": "교실 필수 앱 + 교실 게임\n전부 무료 배포",
+            "tone": "accent"
+          },
+          {
+            "t": "교직 경력",
+            "v": "18년",
+            "d": "현장에서 쓰면서\n고쳐온 시간"
+          }
+        ],
+        "src": "혼자 쓰면 도구, 나누면 자산이 됩니다"
+      },
+      "character": "maker",
+      "charStyle": "right:8px;bottom:126px;width:420px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 8,
+      "top": 150,
+      "label": "이유 07 · 지금",
+      "h1": "지금이\n*가장 쉬운 때*입니다",
+      "ruleW": 520,
+      "sub": "더 미룰수록 배울 게 늘어나지 않습니다.",
+      "note": "도구는 계속 쉬워지는데, 우리 반 사정을 아는 사람은\n여전히 선생님 한 명뿐입니다.",
+      "character": "teacher",
+      "charStyle": "right:0px;bottom:126px;width:520px",
+      "swipe": "마지막 장"
+    },
+    {
+      "n": 9,
+      "top": 260,
+      "label": "SAVE",
+      "h1": "코딩을 배우지 말고\n*만들기부터 하세요*",
+      "ruleW": 560,
+      "sub": "첫 앱은 오늘 저녁에 나옵니다.",
+      "note": "필요한 건 아이디어 하나와, 말로 설명할 용기뿐입니다.",
+      "character": "fairy",
+      "charStyle": "right:0px;bottom:130px;width:620px"
+    }
+  ]
+}
