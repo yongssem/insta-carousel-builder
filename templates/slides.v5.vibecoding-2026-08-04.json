@@ -1,0 +1,228 @@
+{
+  "_comment": "v5 웜 크림 에디토리얼 — 2026-08-04 바이브코딩 소식 9장. 콘텐츠는 '통념 깨기' 구조 유지, 수치/출처는 docs/brief.vibecoding-2026-08-04.json 의 검증분만 사용. 캐릭터는 assets/characters/*.png 를 슬라이드당 1명씩.",
+  "topic": "2026-08-04_바이브코딩소식_v5",
+  "theme": {
+    "bg": "#F1E9DE",
+    "ink": "#1A1A1A",
+    "inkSoft": "#BCB2A4",
+    "accent": "#E1502A",
+    "muted": "#A0968A",
+    "card": "#EBE1D3",
+    "line": "#DCD1C1",
+    "track": "#E3D8C7"
+  },
+  "meta": {
+    "diary": "바이브용샘 diary EP.01",
+    "total": 9,
+    "handle": "@바이브용샘",
+    "studio": "무궁무진클래스"
+  },
+  "slides": [
+    {
+      "n": 1,
+      "top": 150,
+      "label": "SCROLL STOPPER",
+      "h1": "AI가 쓴 코드 42%\n온전히 믿는 사람 *4%*",
+      "ruleW": 600,
+      "sub": "2026년 8월, 바이브코딩 판세.",
+      "note": "숫자 하나가 아니라 두 숫자의 격차를 봐야 합니다.",
+      "character": "dev",
+      "charStyle": "right:-10px;bottom:120px;width:700px",
+      "swipe": "판세 보기"
+    },
+    {
+      "n": 2,
+      "top": 150,
+      "label": "MYTH 01 · 채택",
+      "h1": "채택은 이겼고\n*검증은 졌다*",
+      "ruleW": 460,
+      "sub": "쓰는 사람은 많은데, 확인하는 사람은 절반.",
+      "visual": {
+        "type": "bars",
+        "top": 560,
+        "rows": [
+          {
+            "k": "완전히 신뢰 안 함",
+            "pct": 96,
+            "v": "96%",
+            "tone": "muted"
+          },
+          {
+            "k": "항상 검증함",
+            "pct": 48,
+            "v": "48%"
+          }
+        ],
+        "src": "SONAR, STATE OF CODE 2026 · 1,100+ DEVS"
+      },
+      "character": "scholar",
+      "charStyle": "right:10px;bottom:128px;width:430px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 3,
+      "top": 150,
+      "label": "MYTH 02 · 보안",
+      "h1": "AI 코드의 *45%*가\n취약점을 안고 있다",
+      "ruleW": 520,
+      "sub": "빨리 나온 코드가 안전한 코드는 아닙니다.",
+      "visual": {
+        "type": "bars",
+        "top": 560,
+        "rows": [
+          {
+            "k": "OWASP Top 10 유입",
+            "pct": 45,
+            "v": "45%"
+          },
+          {
+            "k": "자바 실패율",
+            "pct": 72,
+            "v": "72%",
+            "tone": "muted"
+          }
+        ],
+        "src": "VERACODE, SPRING 2026 · 100+ LLMS"
+      },
+      "character": "maker",
+      "charStyle": "right:10px;bottom:128px;width:430px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 4,
+      "top": 150,
+      "label": "MYTH 03 · 품질",
+      "h1": "버그는 줄지 않고\n*41% 늘었다*",
+      "ruleW": 480,
+      "sub": "속도와 품질은 서로 다른 축입니다.",
+      "visual": {
+        "type": "bars",
+        "top": 560,
+        "rows": [
+          {
+            "k": "도입 전",
+            "pct": 62,
+            "v": "기준 100",
+            "tone": "muted"
+          },
+          {
+            "k": "도입 후",
+            "pct": 88,
+            "v": "141 (+41%)"
+          }
+        ],
+        "src": "UPLEVEL · 800 DEVS, COPILOT STUDY"
+      },
+      "character": "dev",
+      "charStyle": "right:10px;bottom:128px;width:430px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 5,
+      "top": 150,
+      "label": "MYTH 04 · 속도",
+      "h1": "체감은 20% 빠름\n*실측은 19% 느림*",
+      "ruleW": 560,
+      "sub": "가장 무서운 건 '빨라진 것 같은 느낌'.",
+      "note": "2025 상반기 기준 — METR이 이후 historical로 재분류",
+      "visual": {
+        "type": "bars",
+        "top": 600,
+        "rows": [
+          {
+            "k": "체감 속도",
+            "pct": 70,
+            "v": "+20%",
+            "tone": "muted"
+          },
+          {
+            "k": "실측 속도",
+            "pct": 66,
+            "v": "-19%"
+          }
+        ],
+        "src": "METR RCT · EARLY 2025 · 16 DEVS, 246 TASKS"
+      },
+      "character": "fairy",
+      "charStyle": "right:14px;bottom:135px;width:400px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 6,
+      "top": 150,
+      "label": "MYTH 05 · 다음",
+      "h1": "만든 사람은\n*이미 옮겼다*",
+      "ruleW": 440,
+      "sub": "이제 역할은 '작성'이 아니라 '방향'.",
+      "visual": {
+        "type": "flow",
+        "top": 580,
+        "from": "VIBE CODING 2025",
+        "to": "AGENTIC ENGINEERING 2026",
+        "src": "KARPATHY, FEB 2026 · COLLINS WOTY 2025"
+      },
+      "character": "maker",
+      "charStyle": "right:10px;bottom:128px;width:430px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 7,
+      "top": 150,
+      "label": "MYTH 06 · 시장",
+      "h1": "이미 취미가\n*아니다*",
+      "ruleW": 420,
+      "sub": "판은 벌써 산업으로 넘어갔습니다.",
+      "visual": {
+        "type": "stats",
+        "top": 545,
+        "items": [
+          {
+            "t": "LOVABLE",
+            "v": "$500M",
+            "d": "연환산 매출\n주 100만 개 신규 프로젝트",
+            "tone": "accent"
+          },
+          {
+            "t": "REPLIT",
+            "v": "$9B",
+            "d": "시리즈D 밸류에이션\n6개월 전 $3B"
+          }
+        ],
+        "src": "TECHCRUNCH, JUN 2026 / MAR 2026"
+      },
+      "character": "teacher",
+      "charStyle": "right:6px;bottom:126px;width:410px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 8,
+      "top": 150,
+      "label": "MYTH 07 · 나",
+      "h1": "앱의 *40%*에\nAI 에이전트가 들어온다",
+      "ruleW": 580,
+      "sub": "남는 건 속도가 아니라 '내 검증 루틴'.",
+      "visual": {
+        "type": "dots",
+        "top": 585,
+        "total": 50,
+        "on": 20,
+        "width": 560,
+        "src": "GARTNER, AUG 2025 FORECAST · 2025 <5% → 2026 40%"
+      },
+      "character": "teacher",
+      "charStyle": "right:6px;bottom:126px;width:410px",
+      "swipe": "마지막 장"
+    },
+    {
+      "n": 9,
+      "top": 260,
+      "label": "SAVE",
+      "h1": "확인하는 습관이\n*실력이 된다*",
+      "ruleW": 500,
+      "sub": "다음 프로젝트 배포 전에 다시 보기.",
+      "note": "빨리 만드는 법은 이미 다 압니다. 다음 반년은 확인이 실력입니다.",
+      "character": "fairy",
+      "charStyle": "right:0px;bottom:130px;width:620px"
+    }
+  ]
+}

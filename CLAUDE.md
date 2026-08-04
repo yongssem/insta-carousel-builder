@@ -23,8 +23,32 @@
 
 | 엔진 | 트리거 키워드 | 스크립트 | 서브에이전트 |
 |:---|:---|:---|:---|
+| ⭐ **v5 하이브리드 (기본)** | 캐릭터가 들어가는 모든 캐러셀 | `build-v5-slides.mjs` → `html-carousel-gen.js` | 없음 (JSON 직접 작성) |
 | 🍌 **나노바나나** | "AI 이미지", "빠르게", "실험", "다양한 시안" | `nanobanana-gen.py` | `carousel-prompt-writer` (JSON) |
 | 🎨 **HTML/Puppeteer** | "정확하게", "광고", "법무", "한 글자 수정", "0원" | `html-carousel-gen.js` | `carousel-html-writer` (HTML) |
+
+### ⭐ v5 하이브리드가 기본인 이유
+
+캐릭터가 들어가면 **9장을 각각 통째로 이미지 생성하면 안 됩니다.** 장마다 얼굴·옷·비율이
+달라져 같은 캐릭터로 안 보입니다. 그래서 역할을 쪼갭니다:
+
+- **캐릭터**: 나노바나나 2 Lite 로 **1회만** 생성 → `assets/characters/*.png` 자산화
+- **슬라이드**: HTML/Puppeteer 합성 → 한글 100%, 헤더·페이지번호·푸터 절대 안 흔들림
+
+```
+# 1. 캐릭터 자산 (최초 1회, 또는 --only <id> 로 개별 재생성)
+python scripts/nanobanana-characters.py
+
+# 2. 슬라이드 데이터 작성 → templates/slides.v5.<topic>.json
+
+# 3. HTML 생성 → PNG 캡처
+node scripts/build-v5-slides.mjs --data templates/slides.v5.<topic>.json --topic <topic>
+node scripts/html-carousel-gen.js --topic <topic>
+```
+
+**캐릭터 배경은 반드시 테마 배경색과 같아야** 합니다 (`templates/characters.json` 의
+`common_style` 에 `#F3EEE2` 고정). 다르면 사각형 자국이 보입니다.
+가장자리는 CSS radial mask 로 부드럽게 지웁니다.
 
 **자동 판단 안 될 때 — CEO에게 1줄 질문**:
 > "🍌 나노바나나(Gemini, 빠른 실험) vs 🎨 HTML(정확/0원) 중 어느 엔진?"

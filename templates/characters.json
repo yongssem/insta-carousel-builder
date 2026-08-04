@@ -1,0 +1,31 @@
+{
+  "_comment": "브랜드 3D 치비 캐릭터 세트. 픽셀아트 레퍼런스를 3D 클레이 렌더로 옮긴 것. 캐러셀 슬라이드마다 1명씩 배치해 쓴다. 배경을 디자인 시스템의 크림색(#F3EEE2)과 동일하게 생성해서 컷아웃 없이 바로 합성 가능하게 함.",
+  "common_style": "3D character render, chibi proportions (large head, small rounded body), soft matte clay-like material, smooth rounded edges, gentle soft studio lighting with a soft drop shadow on the ground, friendly and cheerful expression, cute toy-figure aesthetic like a collectible vinyl figure. IMPORTANT: solid flat background in warm cream color #F3EEE2, absolutely no gradient, no pattern, no scenery, no props other than the ones described. Single character only, centered, full body visible, standing on a subtle soft shadow. No text, no letters, no logos, no watermark anywhere in the image. Clean, high quality, consistent art style across the set.",
+  "characters": [
+    {
+      "id": "dev",
+      "role": "개발자 — 코딩/툴/속도 슬라이드",
+      "prompt": "A cheerful young man giving a thumbs up. Wearing a dark navy zip-up hoodie with bright yellow accent trim, large teal-cyan over-ear headphones around his neck, round glasses. Short dark hair. Big friendly grin. White sneakers."
+    },
+    {
+      "id": "maker",
+      "role": "메이커 — 만들기/실험/프로토타입 슬라이드",
+      "prompt": "A friendly young man wearing brown corduroy overalls over a white long-sleeve shirt, and a cute brown bear-ear hood on his head. He is holding up a glowing blue circuit-board tablet in both hands, looking proud. Warm brown hair peeking out."
+    },
+    {
+      "id": "teacher",
+      "role": "선생님 — 교육/설명/현장 적용 슬라이드",
+      "prompt": "A warm friendly woman with long wavy brown hair, wearing a cream beige open cardigan over a white top and dark navy trousers. She is holding an open silver laptop in one arm, gesturing with the other hand as if explaining something. Calm confident smile."
+    },
+    {
+      "id": "scholar",
+      "role": "학자 — 데이터/연구/출처 슬라이드",
+      "prompt": "A studious character wearing a navy blue graduation cap and matching navy academic gown with gold trim, large round glasses. Holding a thick green hardcover book open in both hands, looking up thoughtfully. Light blonde hair under the cap."
+    },
+    {
+      "id": "fairy",
+      "role": "요정 — 마법/전환/놀라움 슬라이드",
+      "prompt": "A tiny cute fairy floating in mid-air with translucent iridescent wings spread. Bright pink hair tied up with a large pink hibiscus flower, wearing a layered pink and magenta dress. Arms open wide with a joyful open-mouth smile, small sparkles floating around her."
+    }
+  ]
+}
