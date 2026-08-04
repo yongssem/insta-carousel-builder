@@ -84,6 +84,8 @@ const CSS = (T) => `
   .swipe i{font-size:27px}
   .foot{bottom:64px;display:flex;justify-content:space-between;align-items:baseline;z-index:2}
   .foot .h{font-size:27px;font-weight:800;letter-spacing:-0.01em}
+  /* 핸들 옆 표시이름 — 같은 줄, 위계만 낮춤 */
+  .foot .h em{font-style:normal;font-weight:600;color:${T.muted};margin-left:12px;font-size:25px}
   .foot .s{font-size:26px;font-weight:600;color:${T.muted}}
 
   /* ── 시각 요소 ───────────────────────────── */
@@ -253,7 +255,7 @@ function slideHtml(s, meta, T, charRel, anim) {
   }
 
   <div class="pad foot">
-    <span class="h">${esc(meta.handle)}</span>
+    <span class="h">${esc(meta.handle)}${meta.name ? `<em>${esc(meta.name)}</em>` : ''}</span>
     <span class="s">${esc(meta.studio)}</span>
   </div>
 </body>

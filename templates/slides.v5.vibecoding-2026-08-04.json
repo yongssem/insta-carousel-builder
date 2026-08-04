@@ -14,8 +14,9 @@
   "meta": {
     "diary": "바이브용샘 diary EP.01",
     "total": 9,
-    "handle": "@바이브용샘",
-    "studio": "무궁무진클래스"
+    "handle": "@yongssam.dev",
+    "studio": "무궁무진클래스",
+    "name": "바이브용샘"
   },
   "slides": [
     {
@@ -28,7 +29,7 @@
       "note": "숫자 하나가 아니라 두 숫자의 격차를 봐야 합니다.",
       "character": "dev",
       "charStyle": "right:-10px;bottom:120px;width:700px",
-      "swipe": "판세 보기"
+      "swipe": "지금 확인하기"
     },
     {
       "n": 2,
