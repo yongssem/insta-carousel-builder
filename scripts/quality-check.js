@@ -84,13 +84,19 @@ function checkPngDir(dir) {
   const warnings = [];
   const sizes = [];
 
-  if (files.length !== 9) {
-    errors.push(`slide-*.png ${files.length}장 (기대: 9장)`);
-  }
-
+  // 본문 9장 필수. 10번째는 고정 엔드카드(책 홍보)로 허용.
   const expected = Array.from({ length: 9 }, (_, i) => `slide-${String(i + 1).padStart(2, '0')}.png`);
   for (const name of expected) {
     if (!files.includes(name)) errors.push(`${name} 누락`);
+  }
+
+  const hasEndcard = files.includes('slide-10.png');
+  const allowed = hasEndcard ? 10 : 9;
+  if (files.length !== allowed) {
+    errors.push(`slide-*.png ${files.length}장 (기대: 9장, 엔드카드 포함 시 10장)`);
+  }
+  if (!hasEndcard) {
+    warnings.push('slide-10.png (책 홍보 엔드카드) 없음 — node scripts/make-endcard.js --topic <topic>');
   }
 
   for (const f of files) {
