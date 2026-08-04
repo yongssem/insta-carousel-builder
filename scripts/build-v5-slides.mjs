@@ -154,9 +154,11 @@ const CSS = (T) => `
   body.anim .src{animation:fadeIn .6s ease-out 1.5s both}
 
   body.anim .char{animation:charIn .9s cubic-bezier(.22,1,.36,1) .5s both}
-  /* 요정은 등장 후 계속 떠 있게 (감속 없이 루프) */
+  /* 요정은 등장 후 한 번만 살짝 떠올랐다 제자리로.
+     ⚠️ infinite 금지 — 캐러셀 영상은 루프 없이 마지막 프레임에서 정지하므로
+        끝까지 움직이면 어정쩡한 자세로 얼어붙습니다. 영상 종료 전에 반드시 정지. */
   body.anim .char.float{animation:charIn .9s cubic-bezier(.22,1,.36,1) .5s both,
-                                  floaty 2.6s ease-in-out 1.4s infinite}
+                                  floaty 1.5s ease-in-out 1.45s 1 both}
 `;
 
 function visual(v, T) {

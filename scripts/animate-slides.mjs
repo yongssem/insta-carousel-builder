@@ -211,6 +211,25 @@ async function main() {
         frames.push(await page.screenshot({ type: 'png', clip: { x: 0, y: 0, width: W, height: H } }));
       }
 
+      // 정지 검사: 캐러셀 영상은 루프 없이 마지막 프레임에서 멈추므로
+      // 끝까지 움직이면 어정쩡한 자세로 얼어붙는다. 마지막 0.4초는 정지여야 한다.
+      const holdFrames = Math.max(2, Math.round(fps * 0.4));
+      const last = frames[frames.length - 1];
+      const stillFrom = frames.length - holdFrames;
+      let moving = false;
+      for (let i = stillFrom; i < frames.length - 1; i++) {
+        if (Buffer.compare(frames[i], last) !== 0) {
+          moving = true;
+          break;
+        }
+      }
+      if (moving) {
+        console.warn(
+          `  ⚠ ${file}: 마지막 0.4초가 정지하지 않습니다. ` +
+            `infinite 애니메이션이 있는지 확인하세요 (영상은 루프하지 않고 마지막 프레임에서 멈춥니다).`
+        );
+      }
+
       const out = join(outDir, file.replace('.html', '.mp4'));
       await encode(ffmpeg, frames, fps, out);
       let line = `  ✓ ${file.replace('.html', '.mp4')}`;
