@@ -1,7 +1,7 @@
 # insta-carousel-builder — Claude Code 지시서
 
 > 이 프로젝트는 Claude Code에서 직접 실행하는 인스타 캐러셀 자동 제작 도구입니다.
-> 팀원이 "이 주제로 캐러셀 만들어줘"라고 요청하면 **리서치 → 9장 프롬프트 설계 → 나노바나나 Pro 생성 → 품질 검증**까지 수행합니다.
+> 팀원이 "이 주제로 캐러셀 만들어줘"라고 요청하면 **리서치 → 9장 프롬프트 설계 → 나노바나나 2 Lite 생성 → 품질 검증**까지 수행합니다.
 
 ---
 
@@ -134,7 +134,7 @@ output/{topic}/
 
 `.env` 파일 (git 추적 금지):
 ```
-GEMINI_API_KEY=AIza...         # 나노바나나 엔진 사용 시만 필수 (https://aistudio.google.com/apikey)
+GEMINI_API_KEY=AIza...         # 나노바나나 엔진(기본: 2 Lite) 사용 시만 필수 (https://aistudio.google.com/apikey)
 ANTHROPIC_API_KEY=              # (옵션) reviewer 서브에이전트 API 호출용
 ```
 
@@ -165,6 +165,9 @@ npm install   # puppeteer 자동 설치
 
 ## 참고
 
-- **엔진**: `gemini-3-pro-image-preview` (별칭 `nano-banana-pro-preview`)
-- **실측**: 9/9 성공, 4분 20초, 한글 97.8% (에이나우 2026-04-15)
+- **기본 엔진**: `gemini-3.1-flash-lite-image` (나노바나나 2 Lite) — 가장 빠르고 저렴한 티어, 1장당 약 4초
+- **교체 가능**: `--model gemini-3.1-flash-image-preview` (나노바나나 2, 고품질) / `--model gemini-3-pro-image-preview` (나노바나나 Pro, 구 기본값)
+- **비율**: `--aspect-ratio 4:5` 기본 (인스타 캐러셀 1080×1350)
+- **⚠️ Lite 해상도 제약**: 1K 만 지원 → 4:5 기준 약 896×1152 출력. 1080×1350 원본이 필요하면 나노바나나 2(`gemini-3.1-flash-image-preview`) + `--image-size 2K`, 또는 HTML 엔진 사용
+- **실측(Pro 기준)**: 9/9 성공, 4분 20초, 한글 97.8% (에이나우 2026-04-15). Lite 는 속도·비용 우위, 한글 정확도는 재측정 필요
 - **원본 이관**: 에이나우 내부 `nanobanana-carousel` Skill 의 오픈소스 버전

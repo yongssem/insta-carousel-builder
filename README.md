@@ -1,7 +1,7 @@
 # insta-carousel-builder
 
 > **Claude Code 하네스로 돌아가는 인스타 캐러셀 자동 제작 도구.**
-> **듀얼 엔진**: 나노바나나 Pro(Gemini 3.0 Pro Image) + HTML/CSS+Puppeteer.
+> **듀얼 엔진**: 나노바나나 2 Lite(Gemini 3.1 Flash-Lite Image) + HTML/CSS+Puppeteer.
 
 AI 이미지 도구로 인스타 캐러셀을 만들면 한글이 깨지고 AI 티가 나서 결국 수작업/외주로 돌아간다 — 는 통념을, **두 엔진 골라 쓰기**로 깨는 레포입니다.
 
