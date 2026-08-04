@@ -22,14 +22,14 @@
  *   산출물의 최신성까지 확인하고 끝냅니다.
  *
  * 옵션:
- *   --motion <spec>  어느 장을 움직일지 선택 (기본: all)
+ *   --motion <spec>  어느 장을 움직일지 선택 (기본: alt)
+ *       alt            짝수 장만 (2,4,6,8) — 정적/모션 교차로 리듬  ← 기본값
  *       all            본문 2~9 전부 모션
- *       none           전부 정적 (= --skip-video)
- *       data           시각 요소(막대/스탯/도트/플로우)가 있는 장만  ← 추천
+ *       data           시각 요소(막대/스탯/도트/플로우)가 있는 장만
  *       last           마지막 장(Outro)만
- *       first,last     첫 장과 마지막 장
  *       2,5,8          번호 직접 지정
- *       alt            짝수 장만 (2,4,6,8)
+ *       none           전부 정적 (= --skip-video)
+ *       first,last     첫 장과 마지막 장 (커버 모션은 썸네일 손해 — 권장 안 함)
  *   --skip-video     PNG 9장만 (빠른 시안 확인용, --motion none 과 동일)
  *   --duration 3.5   영상 길이(초). 인스타 피드 최소 3초이므로 그 밑으로 내리지 말 것
  *   --gif 1          블로그/스레드용 GIF 동시 출력 (인스타 피드는 GIF 미지원)
@@ -90,7 +90,7 @@ const lastNum = Math.max(...allNums);
 const withVisual = slideData.slides.filter((s) => s.visual).map((s) => s.n);
 
 function resolveMotion(spec) {
-  const t = String(spec || 'all').trim().toLowerCase();
+  const t = String(spec || 'alt').trim().toLowerCase();
   if (t === 'none') return [];
   if (t === 'all') return allNums.filter((n) => n !== 1); // 커버는 정적 유지
   if (t === 'data') return withVisual;
