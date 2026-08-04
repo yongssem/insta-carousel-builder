@@ -127,10 +127,9 @@ const CSS = (T) => `
   @keyframes charIn{from{opacity:0;transform:translateY(60px) scale(.94)}to{opacity:1;transform:none}}
   @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
 
-  body.anim .head,
-  body.anim .foot,
-  body.anim .ghost{animation:fadeIn .7s ease-out both}
-  body.anim .ghost{animation-delay:.25s}
+  /* 헤더·푸터·고스트넘버는 절대 페이드하지 않는다.
+     인스타에서 자동재생이 막히거나(데이터 절약 모드) 썸네일로 첫 프레임이
+     쓰이면 빈 화면이 노출되기 때문. 프레임 구조는 0초부터 보여야 한다. */
   body.anim .label{animation:fadeUp .65s cubic-bezier(.22,1,.36,1) both}
   body.anim h1{animation:fadeUp .8s cubic-bezier(.22,1,.36,1) .14s both}
   body.anim .rule{transform-origin:left center;animation:growX .65s cubic-bezier(.22,1,.36,1) .42s both}
