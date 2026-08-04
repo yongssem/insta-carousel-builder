@@ -200,9 +200,28 @@ Phase 3b (HTML):
 
 ---
 
+## 소재는 어디서 오나
+
+캐러셀 품질의 8할은 **소재 출처**에서 갈립니다. `knowledge/sources.md` 가 SSOT:
+
+- **선별 기준이 출처보다 먼저** — "내일 교실 테스트"(이 소식으로 내일 교실이 달라지나)를
+  통과 못 하면 아무리 큰 뉴스여도 버립니다. 점수표 5점 미만은 제작 금지.
+- **1차 출처만 인용** — 블로그가 인용한 숫자 재인용 금지. 실제로 EP.01 리서치에서
+  "92% / 신뢰도 29%"가 원 조사 특정 불가로 폐기된 적이 있습니다.
+- **국내 먼저** — KERIS·교육부가 해외 통계보다 국내 교사에게 확실히 꽂힙니다.
+
+```bash
+/news-radar        # 주간 소재 수집 → knowledge/reference/backlog.md 에 채점해 누적
+```
+
+캐러셀을 만들 때는 매번 새로 찾지 말고 **백로그에서 골라** 씁니다.
+
+---
+
 ## 작성 전 반드시 Read (생략 금지)
 
 **매 작업마다**:
+0. `knowledge/sources.md` — 소재 출처 + 선별 점수표
 1. `knowledge/brand-facts.md` — 수치/브랜드 SSOT (이 파일 외 숫자 금지)
 2. `knowledge/patterns/carousel-structure.md` — 9장 구조 공식
 3. `templates/slides.example.json` — 프롬프트 템플릿

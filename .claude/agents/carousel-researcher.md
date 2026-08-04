@@ -37,9 +37,20 @@ tools: Read, Write, Bash, WebSearch, WebFetch, Grep
 
 ## 리서치 방법
 
-1. **WebSearch**: "$주제 인스타 카드뉴스", "$주제 캐러셀 2026" 등
-2. **내부 지식 참조**: `knowledge/patterns/carousel-structure.md` (9장 구조 7가지)
-3. **브랜드 팩트 참조**: `knowledge/brand-facts.md` 수치 외엔 인용 금지
+0. **`knowledge/sources.md` 를 먼저 읽습니다** — 출처 목록과 선별 기준(점수표).
+   여기 없는 출처를 쓸 거면 그게 1차 출처인지 먼저 확인하세요.
+1. **국내 먼저**: KERIS / 교육부 → 국내 교사에게 가장 확실히 꽂힙니다
+2. **WebSearch**: 해외 통계는 Stanford HAI · EdWeek 등 1차 출처로 확인
+3. **내부 지식 참조**: `knowledge/patterns/carousel-structure.md` (구조 7가지)
+4. **브랜드 수치**: `knowledge/brand-facts.md` 의 값만 인용 (18년차, 163개 등)
+5. **백로그 확인**: `knowledge/reference/backlog.md` 에 이미 채점된 후보가 있으면 우선 활용
+
+## 수치 검증 (생략 금지)
+
+- 블로그·미디엄이 인용한 숫자를 **재인용하지 마세요.** 1차 출처까지 올라가 확인합니다.
+- 원 조사를 특정할 수 없으면 **폐기**하고 `excluded_unverified` 에 사유를 남깁니다.
+- 모든 수치에 **기관명 + 발표시점**을 함께 기록합니다 (나중에 재분류되는 연구가 있음).
+- 해외 수치는 "미국 기준" 등 적용 범위를 반드시 병기합니다.
 
 ## 철칙
 
