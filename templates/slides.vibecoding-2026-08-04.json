@@ -1,0 +1,51 @@
+{
+  "_comment": "2026-08-04 바이브코딩 뉴스 브리핑 9장 — '통념 깨기' 구조. 나노바나나 2 Lite(gemini-3.1-flash-lite-image, 1K) 대응으로 슬라이드당 한글은 헤드라인 2줄 + 캡션 1줄로 제한하고, 수치 옆 출처 기관명은 전부 영문 표기. 슬라이드 5는 METR 시점(2025 상반기 기준) 병기 필수.",
+  "common_style": "Instagram carousel slide design, 4:5 aspect ratio (1080x1350 px). Trendy magazine editorial style, premium dark. - Background: deep black #0B0B0E with ONE soft warm radial glow (top-right, orange tinted, subtle) and a very subtle film grain texture. - Primary accent: warm orange gradient from #F0956B to #CF5C3F (used for headline keyword, thin progress bar at very top, underline bar). - Primary text: pure white #FFFFFF. - Secondary text: white 45% opacity. - Labels: rounded pill chip with thin orange border, small glowing orange dot, uppercase letter-spaced text. - Signature: huge outlined ghost number in background top-right (outline only, white 7% opacity). - Footer on every slide: small letter-spaced brand name bottom-left, page number like '02 / 09' bottom-right (current number orange). - Typography: Korean sans-serif (Pretendard-like), oversized extra-bold headlines with tight letter-spacing, monospace only for code/numbers. - Cards: dark surface with 1px white 9% hairline border, 24px rounded corners. - Layout: generous whitespace, left-aligned, trendy tech magazine feel. - Mood: professional, developer-focused, clean, modern, premium.",
+  "slides": [
+    {
+      "n": 1,
+      "role": "Cover",
+      "prompt": "COVER SLIDE, news-briefing style. Render ONLY the text listed here, nothing extra. - Bottom-left orange pill chip label in Latin letters: \"VIBE CODING BRIEF · 2026.08\". - Huge extra-bold Korean headline, exactly two short lines, exact Korean spelling, no typos: line 1 \"AI가 쓴 코드 42%\" (white, with \"42%\" in monospace), line 2 \"믿는 사람 4%\" (orange gradient, with \"4%\" in monospace). Keep the Korean characters large and crisp; do not shrink them. - Short orange gradient underline bar under the headline. - ONE visual element only: a slim horizontal contrast rail directly under the underline bar, split into a wide orange gradient segment labeled \"42%\" and a tiny white segment labeled \"4%\", both labels in small monospace Latin/numerals. - Small gray monospace source line beneath the rail: \"SONAR, STATE OF CODE 2026\". - Gray Korean caption, ONE line only, exact spelling: \"2026년 8월 판세\". - Huge outlined ghost number \"42\" in background top-right. - Bottom-right small pill chip \"SWIPE →\". - Footer text in Latin/numerals only. - Top 40% of the canvas stays empty: generous whitespace, left-aligned, magazine feel."
+    },
+    {
+      "n": 2,
+      "role": "통념 01 — 채택이 끝났으니 논쟁도 끝났다",
+      "prompt": "MYTH 01 slide. Render ONLY the text listed here, nothing extra. - Top-left orange pill chip label \"MYTH 01 · ADOPTION\". - Ghost outlined number \"01\" in background top-right. - Korean headline, two short lines, exact Korean spelling, no typos: \"채택은 이겼고\" (white) / \"검증은 졌다\" (orange gradient). - ONE visual element only: two stacked horizontal bars inside a single hairline card — top bar filled 96% in white 30% with monospace label \"96% DON'T FULLY TRUST\", bottom bar filled 48% in orange gradient with monospace label \"48% ALWAYS VERIFY\"; the empty gap of the bottom bar is outlined and tagged \"GAP\" in small orange monospace. - Small gray monospace source line under the card: \"SONAR 2026 · 1,100+ DEVS\". - Gray Korean caption, ONE line only: \"확인은 절반뿐\". - Footer text in Latin/numerals only. - Generous whitespace, left-aligned, magazine feel."
+    },
+    {
+      "n": 3,
+      "role": "통념 02 — AI가 짠 코드는 사람 것보다 안전하다",
+      "prompt": "MYTH 02 slide. Render ONLY the text listed here, nothing extra. - Top-left orange pill chip label \"MYTH 02 · SECURITY\". - Ghost outlined number \"02\" in background top-right. - Korean headline, two short lines, exact Korean spelling, no typos: \"AI 코드의 45%가\" (white, \"45%\" in monospace) / \"취약점 포함\" (orange gradient). - ONE visual element only: a single large circular donut gauge, 45% of the ring filled with orange gradient and the rest white 10%, with big monospace \"45%\" centered inside and small Latin caption \"OWASP TOP 10\" beneath the ring; to the right of the gauge one small monospace stat line \"JAVA 72% FAIL\". - Small gray monospace source line: \"VERACODE, SPRING 2026 · 100+ LLMS\". - Gray Korean caption, ONE line only: \"보안은 별개 문제\". - Footer text in Latin/numerals only. - Generous whitespace, left-aligned, magazine feel."
+    },
+    {
+      "n": 4,
+      "role": "통념 03 — AI를 붙이면 버그가 줄어든다 (데이터 슬라이드)",
+      "prompt": "MYTH 03 slide, data slide. Render ONLY the text listed here, nothing extra. - Top-left orange pill chip label \"MYTH 03 · BUGS\". - Ghost outlined number \"03\" in background top-right. - Korean headline, two short lines, exact Korean spelling, no typos: \"버그는 오히려\" (white) / \"41% 증가\" (orange gradient, \"41%\" in monospace). - ONE visual element only: a minimal two-column vertical bar chart inside a hairline card — left short bar in white 25% labeled \"BEFORE\" in monospace, right tall bar in orange gradient labeled \"WITH AI TOOLS\" in monospace, with a small \"+41%\" monospace tag floating above the right bar; no grid lines, no axis numbers. - Small gray monospace source line under the card: \"UPLEVEL · 800 DEVS, COPILOT STUDY\". - Gray Korean caption, ONE line only: \"속도와 품질은 다른 축\". - Footer text in Latin/numerals only. - Generous whitespace, left-aligned, magazine feel."
+    },
+    {
+      "n": 5,
+      "role": "통념 04 — 무조건 빨라진다 (반전/대조)",
+      "prompt": "MYTH 04 slide, reversal/contrast slide. Render ONLY the text listed here, nothing extra. - Top-left orange pill chip label \"MYTH 04 · SPEED\". - Ghost outlined number \"04\" in background top-right. - Korean headline, two short lines, exact Korean spelling, no typos: \"체감 20% 빠름\" (white, \"20%\" in monospace) / \"실측 19% 느림\" (orange gradient, \"19%\" in monospace). - ONE visual element only: two opposing horizontal bars sharing one center baseline inside a hairline card — upper bar extends right in white 30% tagged \"FELT +20%\" in monospace, lower bar extends left in orange gradient tagged \"MEASURED -19%\" in monospace. - Small gray monospace source line under the card, MUST be present: \"METR RCT · EARLY 2025 · 16 DEVS, 246 TASKS\". - Gray Korean caption, ONE line only, exact Korean spelling, this exact time-scope wording is mandatory: \"2025 상반기 기준\". - Footer text in Latin/numerals only. - Generous whitespace, left-aligned, magazine feel."
+    },
+    {
+      "n": 6,
+      "role": "통념 05 — 바이브코딩이 최종 형태다",
+      "prompt": "MYTH 05 slide. Render ONLY the text listed here, nothing extra. - Top-left orange pill chip label \"MYTH 05 · WHAT'S NEXT\". - Ghost outlined number \"05\" in background top-right. - Korean headline, two short lines, exact Korean spelling, no typos: \"만든 사람은\" (white) / \"이미 옮겼다\" (orange gradient). - ONE visual element only: a single horizontal transition diagram — left dim pill in white 25% reading \"VIBE CODING 2025\" (monospace, slightly faded), a long orange gradient arrow in the middle, right bright pill with orange gradient border reading \"AGENTIC ENGINEERING 2026\" (monospace). All diagram text in Latin letters only. - Small gray monospace source line: \"KARPATHY, FEB 2026 · COLLINS WOTY 2025\". - Gray Korean caption, ONE line only: \"작성이 아니라 방향\". - Footer text in Latin/numerals only. - Generous whitespace, left-aligned, magazine feel."
+    },
+    {
+      "n": 7,
+      "role": "통념 06 — 아직 취미 수준 시장이다",
+      "prompt": "MYTH 06 slide. Render ONLY the text listed here, nothing extra. - Top-left orange pill chip label \"MYTH 06 · MARKET\". - Ghost outlined number \"06\" in background top-right. - Korean headline, two short lines, exact Korean spelling, no typos: \"이미 취미가\" (white) / \"아니다\" (orange gradient). - ONE visual element only: two side-by-side hairline stat cards, all card text in Latin letters and numerals only — left card \"LOVABLE\" with huge orange monospace \"$500M\" and small gray lines \"ANNUALIZED REVENUE\" and \"1M NEW PROJECTS / WEEK\"; right card \"REPLIT\" with huge white monospace \"$9B\" and small gray line \"SERIES D VALUATION\". - Small gray monospace source line under the cards: \"TECHCRUNCH, JUN 2026 / MAR 2026\". - Gray Korean caption, ONE line only: \"판은 이미 산업\". - Footer text in Latin/numerals only. - Generous whitespace, left-aligned, magazine feel."
+    },
+    {
+      "n": 8,
+      "role": "통념 07 — 1인 크리에이터한테는 먼 얘기다 (클라이맥스)",
+      "prompt": "MYTH 07 slide, climax slide, slightly stronger orange glow. Render ONLY the text listed here, nothing extra. - Top-left orange pill chip label \"MYTH 07 · YOU\". - Ghost outlined number \"07\" in background top-right. - Korean headline, two short lines, exact Korean spelling, no typos: \"앱의 40%에\" (white, \"40%\" in monospace) / \"AI 에이전트\" (orange gradient). - ONE visual element only: a 10 x 5 dot grid of 50 small squares inside a hairline card, exactly 20 squares filled with orange gradient (40%) and the remaining 30 as white 10% outlines, with a tiny monospace legend below the grid \"2025 <5%  →  2026 40%\". - Small gray monospace source line under the card: \"GARTNER, AUG 2025 FORECAST\". - Gray Korean caption, ONE line only: \"남는 건 검증 루틴\". - Footer text in Latin/numerals only. - Generous whitespace, left-aligned, magazine feel."
+    },
+    {
+      "n": 9,
+      "role": "Outro",
+      "prompt": "OUTRO / closing slide. Render ONLY the text listed here, nothing extra. Vertically centered block, left-aligned. - Orange pill chip label \"SAVE\" at the top of the block. - Large extra-bold Korean headline, exactly two short lines, exact Korean spelling, no typos, large and crisp: \"확인하는 습관이\" (white) / \"실력이 된다\" (orange gradient). - Short orange gradient underline bar below the headline. - Gray Korean caption, ONE line only, exact spelling: \"배포 전에 다시 보기\". - ONE visual element only: a single orange gradient pill CTA button with a simple bookmark icon and the short Korean word \"저장하기\" (exact Korean spelling, no typos). - Soft centered warm glow; outlined ghost word \"SAVE\" in Latin letters in background bottom-right. - Footer text in Latin/numerals only. - Over 60% of the canvas is empty dark space: generous whitespace, left-aligned, premium magazine feel."
+    }
+  ]
+}
