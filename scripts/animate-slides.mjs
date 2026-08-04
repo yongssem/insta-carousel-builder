@@ -19,6 +19,7 @@
  *   node scripts/build-v5-slides.mjs --data <json> --topic <t> --animate 1
  *   node scripts/animate-slides.mjs --topic <t>
  *   node scripts/animate-slides.mjs --topic <t> --only 5 --duration 4
+ *   node scripts/animate-slides.mjs --topic <t> --only 2,5,8   # 지정 슬라이드만
  *   node scripts/animate-slides.mjs --topic <t> --gif 1     # 블로그용 GIF 동시 출력
  *
  * 결과:
@@ -163,10 +164,13 @@ async function main() {
 
   let files = readdirSync(slidesDir).filter((f) => f.endsWith('.html')).sort();
   if (args.only) {
-    const t = `slide-${String(args.only).padStart(2, '0')}.html`;
-    files = files.filter((f) => f === t);
+    // 쉼표로 여러 장 지정 가능: --only 2,5,8
+    const wanted = String(args.only)
+      .split(',')
+      .map((x) => `slide-${String(x.trim()).padStart(2, '0')}.html`);
+    files = files.filter((f) => wanted.includes(f));
     if (!files.length) {
-      console.error(`❌ ${t} 없음`);
+      console.error(`❌ 해당 슬라이드 없음: ${args.only}`);
       process.exit(1);
     }
   }

@@ -22,12 +22,20 @@
  *   산출물의 최신성까지 확인하고 끝냅니다.
  *
  * 옵션:
- *   --skip-video     PNG 9장만 (빠른 시안 확인용)
+ *   --motion <spec>  어느 장을 움직일지 선택 (기본: all)
+ *       all            본문 2~9 전부 모션
+ *       none           전부 정적 (= --skip-video)
+ *       data           시각 요소(막대/스탯/도트/플로우)가 있는 장만  ← 추천
+ *       last           마지막 장(Outro)만
+ *       first,last     첫 장과 마지막 장
+ *       2,5,8          번호 직접 지정
+ *       alt            짝수 장만 (2,4,6,8)
+ *   --skip-video     PNG 9장만 (빠른 시안 확인용, --motion none 과 동일)
  *   --duration 3.5   영상 길이(초). 인스타 피드 최소 3초이므로 그 밑으로 내리지 말 것
  *   --gif 1          블로그/스레드용 GIF 동시 출력 (인스타 피드는 GIF 미지원)
  */
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdirSync, copyFileSync, statSync, readdirSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, copyFileSync, statSync, readdirSync, rmSync, readFileSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -72,12 +80,57 @@ if (!existsSync(join(REPO_ROOT, dataPath)) && !existsSync(dataPath)) {
 }
 
 const outRoot = join(REPO_ROOT, 'output', topic);
-const wantVideo = !args['skip-video'];
 const NODE = process.execPath;
+
+// 슬라이드 데이터에서 번호/시각요소 정보를 읽어 모션 대상 결정
+const dataAbs = existsSync(dataPath) ? dataPath : join(REPO_ROOT, dataPath);
+const slideData = JSON.parse(readFileSync(dataAbs, 'utf-8'));
+const allNums = slideData.slides.map((s) => s.n);
+const lastNum = Math.max(...allNums);
+const withVisual = slideData.slides.filter((s) => s.visual).map((s) => s.n);
+
+function resolveMotion(spec) {
+  const t = String(spec || 'all').trim().toLowerCase();
+  if (t === 'none') return [];
+  if (t === 'all') return allNums.filter((n) => n !== 1); // 커버는 정적 유지
+  if (t === 'data') return withVisual;
+  if (t === 'alt') return allNums.filter((n) => n % 2 === 0);
+  const parts = t.split(',').map((x) => x.trim()).filter(Boolean);
+  const out = new Set();
+  for (const part of parts) {
+    if (part === 'first') out.add(1);
+    else if (part === 'last') out.add(lastNum);
+    else if (/^\d+$/.test(part)) out.add(Number(part));
+    else {
+      console.error(`❌ --motion 값을 이해할 수 없습니다: "${part}"`);
+      console.error('   사용 가능: all | none | data | alt | first | last | 2,5,8');
+      process.exit(1);
+    }
+  }
+  const bad = [...out].filter((n) => !allNums.includes(n));
+  if (bad.length) {
+    console.error(`❌ 존재하지 않는 슬라이드 번호: ${bad.join(', ')}`);
+    process.exit(1);
+  }
+  return [...out].sort((a, b) => a - b);
+}
+
+const motion = args['skip-video'] ? [] : resolveMotion(args.motion);
+const wantVideo = motion.length > 0;
 
 console.log(`\n캐러셀 생성: ${topic}`);
 console.log(`데이터: ${dataPath}`);
-console.log(wantVideo ? '모드: 움직이는 캐러셀 (PNG + MP4)' : '모드: 정적 시안만 (PNG)');
+console.log(
+  wantVideo
+    ? `모드: 움직이는 캐러셀 — 모션 슬라이드 ${motion.join(', ')} (나머지는 정적 PNG)`
+    : '모드: 정적 시안만 (PNG)'
+);
+if (motion.includes(1)) {
+  console.log(
+    '⚠️ 1장(커버)을 모션으로 지정했습니다. 커버는 피드 썸네일이 되는데\n' +
+      '   영상의 첫 프레임이 썸네일로 쓰여 거의 빈 화면이 노출될 수 있습니다.'
+  );
+}
 
 // 1) 정적 PNG
 run('정적 슬라이드 HTML 생성', NODE, ['scripts/build-v5-slides.mjs', '--data', dataPath, '--topic', topic]);
@@ -88,7 +141,7 @@ if (wantVideo) {
   run('애니메이션 HTML 생성', NODE, [
     'scripts/build-v5-slides.mjs', '--data', dataPath, '--topic', topic, '--animate', '1',
   ]);
-  const animArgs = ['scripts/animate-slides.mjs', '--topic', topic];
+  const animArgs = ['scripts/animate-slides.mjs', '--topic', topic, '--only', motion.join(',')];
   if (args.duration) animArgs.push('--duration', args.duration);
   if (args.gif) animArgs.push('--gif', '1');
   run('MP4 인코딩', NODE, animArgs);
@@ -110,11 +163,14 @@ if (existsSync(uploadDir)) rmSync(uploadDir, { recursive: true, force: true });
 mkdirSync(uploadDir, { recursive: true });
 
 // 커버는 정적 PNG — 피드 썸네일이 되는 장
-copyFileSync(join(outRoot, 'slide-01.png'), join(uploadDir, '01-cover.png'));
-for (let n = 2; n <= 9; n++) {
+for (const n of allNums) {
   const nn = String(n).padStart(2, '0');
-  if (wantVideo) copyFileSync(join(outRoot, 'video', `slide-${nn}.mp4`), join(uploadDir, `${nn}.mp4`));
-  else copyFileSync(join(outRoot, `slide-${nn}.png`), join(uploadDir, `${nn}.png`));
+  const base = n === 1 ? '01-cover' : nn;
+  if (motion.includes(n)) {
+    copyFileSync(join(outRoot, 'video', `slide-${nn}.mp4`), join(uploadDir, `${base}.mp4`));
+  } else {
+    copyFileSync(join(outRoot, `slide-${nn}.png`), join(uploadDir, `${base}.png`));
+  }
 }
 if (hasEndcard) copyFileSync(join(outRoot, 'slide-10.png'), join(uploadDir, '10-endcard.png'));
 
@@ -122,7 +178,7 @@ if (hasEndcard) copyFileSync(join(outRoot, 'slide-10.png'), join(uploadDir, '10-
 const problems = [];
 if (wantVideo) {
   const animDir = join(outRoot, 'slides-anim');
-  for (let n = 2; n <= 9; n++) {
+  for (const n of motion) {
     const nn = String(n).padStart(2, '0');
     const html = join(animDir, `slide-${nn}.html`);
     const mp4 = join(outRoot, 'video', `slide-${nn}.mp4`);
@@ -148,6 +204,9 @@ const files = readdirSync(uploadDir).sort();
 console.log(`✅ 업로드 폴더 준비 완료 — ${uploadDir}`);
 files.forEach((f) => console.log(`   ${f}`));
 console.log('\n올리는 순서대로 파일명이 정렬돼 있습니다.');
-console.log('커버(01)는 정적 PNG — 피드 썸네일이 되는 장이라 영상으로 두지 않았습니다.');
+if (!motion.includes(1)) {
+  console.log('커버(01)는 정적 PNG — 피드 썸네일이 되는 장이라 영상으로 두지 않았습니다.');
+}
+console.log(`모션 ${motion.length}장 / 정적 ${allNums.length - motion.length}장`);
 if (!hasEndcard) console.log('⚠️ 책 홍보 엔드카드가 빠져 있습니다 (assets/book-promo-endcard.png).');
 console.log('⚠️ 캡션의 프로필 링크를 이번 게시물에 맞게 교체했는지 확인하세요.\n');
