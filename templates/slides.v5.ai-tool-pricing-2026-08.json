@@ -1,0 +1,203 @@
+{
+  "_comment": "v5 — '클로드·러버블 요금제' 9장. EP.04. 구조는 비교·선택 가이드(EP.01 통념깨기 / EP.02 Before-After / EP.03 체크리스트와 다르게). 모든 요금은 2026-08-05 공식 요금 페이지 원문 확인분만 사용. 확인 못 한 수치(러버블 무료 플랜 크레딧 수 등)는 제외.",
+  "topic": "ai-tool-pricing-2026-08",
+  "theme": {
+    "bg": "#F1E9DE",
+    "ink": "#1A1A1A",
+    "inkSoft": "#BCB2A4",
+    "accent": "#E1502A",
+    "muted": "#A0968A",
+    "card": "#EBE1D3",
+    "line": "#DCD1C1",
+    "track": "#E3D8C7"
+  },
+  "meta": {
+    "diary": "바이브용샘 diary EP.04",
+    "total": 9,
+    "handle": "@yongssam.dev",
+    "studio": "무궁무진클래스",
+    "name": "바이브용샘"
+  },
+  "slides": [
+    {
+      "n": 1,
+      "top": 150,
+      "label": "SCROLL STOPPER",
+      "h1": "우리 반 앱 하나\n*한 달에 얼마 들까*",
+      "ruleW": 540,
+      "sub": "클로드와 러버블 요금제, 8월 5일 기준으로 정리했습니다.",
+      "note": "9월 1일부터 오르는 항목이 하나 있습니다.",
+      "character": "teacher",
+      "charStyle": "right:-4px;bottom:118px;width:640px",
+      "swipe": "지금 확인하기"
+    },
+    {
+      "n": 2,
+      "top": 150,
+      "label": "클로드 · 개인 요금제",
+      "h1": "Pro부터\n*클로드 코드가 들어옵니다*",
+      "ruleW": 600,
+      "sub": "무료로도 대화는 되지만, 앱을 만들려면 Pro입니다.",
+      "visual": {
+        "type": "stats",
+        "top": 570,
+        "items": [
+          {
+            "t": "무료",
+            "v": "$0",
+            "d": "채팅·웹검색\n파일 생성·코드 실행"
+          },
+          {
+            "t": "Pro",
+            "v": "$18",
+            "d": "클로드 코드 포함\n여기부터 앱 제작",
+            "tone": "accent"
+          },
+          {
+            "t": "Max",
+            "v": "$110~",
+            "d": "Pro 대비 사용량\n5배 또는 20배"
+          }
+        ],
+        "src": "claude.com/pricing 개인 탭 · 2026-08-05 확인"
+      },
+      "character": "dev",
+      "charStyle": "right:8px;bottom:126px;width:340px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 3,
+      "top": 150,
+      "label": "러버블 · 크레딧제",
+      "h1": "러버블은 정액이 아니라\n*크레딧을 삽니다*",
+      "ruleW": 620,
+      "sub": "월 요금에 크레딧이 붙어 나오는 방식입니다.",
+      "visual": {
+        "type": "stats",
+        "top": 590,
+        "items": [
+          {
+            "t": "Pro",
+            "v": "$25",
+            "d": "월간 크레딧 100개\n혼자 쓰기엔 이걸로 충분",
+            "tone": "accent"
+          },
+          {
+            "t": "Business",
+            "v": "$50",
+            "d": "월간 크레딧 100개\n팀 기능이 붙습니다"
+          }
+        ],
+        "src": "lovable.dev/pricing 월간 탭 · 2026-08-05 확인"
+      },
+      "character": "maker",
+      "charStyle": "right:8px;bottom:126px;width:410px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 4,
+      "top": 150,
+      "label": "여기가 함정",
+      "h1": "값은 두 배인데\n*크레딧은 똑같습니다*",
+      "ruleW": 620,
+      "sub": "Business의 추가 25달러는 사용량이 아닙니다.",
+      "visual": {
+        "type": "flow",
+        "top": 600,
+        "from": "더 많이 만들려고 업그레이드",
+        "to": "팀 기능에 내는 돈",
+        "src": "SSO · 팀 워크스페이스 · 역할 기반 접근 권한"
+      },
+      "note": "혼자 쓰는 교사라면 Business로 올릴 이유가 없습니다.",
+      "character": "scholar",
+      "charStyle": "right:8px;bottom:126px;width:410px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 5,
+      "top": 150,
+      "label": "9월 1일 · 예고된 인상",
+      "h1": "도입가가\n*8월 31일에 끝납니다*",
+      "ruleW": 560,
+      "sub": "클로드 API의 Sonnet 5 토큰 요금이 오릅니다.",
+      "visual": {
+        "type": "flow",
+        "top": 600,
+        "from": "입력 $2 · 출력 $10",
+        "to": "입력 $3 · 출력 $15",
+        "src": "100만 토큰당 · 2026년 9월 1일부터"
+      },
+      "note": "구독(Pro·Max)으로 쓰시는 분은 청구 방식이 다릅니다.\nAPI 키를 직접 꽂아 쓰실 때의 이야기입니다.",
+      "character": "fairy",
+      "charStyle": "right:14px;bottom:134px;width:380px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 6,
+      "top": 150,
+      "label": "교사만 해당 · 놓치기 쉬움",
+      "h1": "학교용 통로가\n*따로 있습니다*",
+      "ruleW": 560,
+      "sub": "러버블은 교육용 프로그램을 별도로 운영합니다.",
+      "visual": {
+        "type": "chips",
+        "top": 600,
+        "items": [
+          { "t": "학생 인증 시 Pro 최대 50% 할인", "on": true },
+          { "t": "대학교용 결제·관리 제어" },
+          { "t": "어린이용은 imagi와 협력" },
+          { "t": "학교 규정 준수 커리큘럼 제공" }
+        ],
+        "src": "lovable.dev/pricing 하단 · 2026-08-05 확인"
+      },
+      "character": "teacher",
+      "charStyle": "right:6px;bottom:126px;width:400px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 7,
+      "top": 150,
+      "label": "돈 아끼는 법",
+      "h1": "연간으로 결제하면\n*두 달이 공짜입니다*",
+      "ruleW": 620,
+      "sub": "러버블 요금제 상단의 연간 탭에 표시돼 있습니다.",
+      "note": "다만 한 달 써보고 결정하세요.\n크레딧이 남는지 모자라는지는 써봐야 압니다.",
+      "character": "maker",
+      "charStyle": "right:8px;bottom:126px;width:420px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 8,
+      "top": 150,
+      "label": "그래서 · 순서",
+      "h1": "이 순서대로\n*정하시면 됩니다*",
+      "ruleW": 560,
+      "sub": "한꺼번에 다 결제하지 마세요.",
+      "visual": {
+        "type": "chips",
+        "top": 610,
+        "items": [
+          { "t": "무료로 먼저 만들어보기" },
+          { "t": "막히면 클로드 Pro 하나" },
+          { "t": "러버블은 그다음에" },
+          { "t": "연간은 마지막에", "on": true }
+        ],
+        "src": "요금은 국가·시점별로 다릅니다. 결제 전 공식 페이지 확인"
+      },
+      "character": "dev",
+      "charStyle": "right:8px;bottom:126px;width:400px",
+      "swipe": "마지막 장"
+    },
+    {
+      "n": 9,
+      "top": 260,
+      "label": "SAVE",
+      "h1": "결제창 열기 전에\n*한 번 더 보기*",
+      "ruleW": 600,
+      "sub": "9월에 요금 바뀌면 다시 꺼내 볼 내용입니다.",
+      "note": "공식 요금 페이지 기준 · 2026년 8월 5일 확인",
+      "character": "fairy",
+      "charStyle": "right:0px;bottom:130px;width:600px"
+    }
+  ]
+}
