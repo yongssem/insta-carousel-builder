@@ -1,0 +1,183 @@
+{
+  "_comment": "v5 — '클로드 코드 브레이크 6개' 9장. 구조는 체크리스트(EP.01 통념깨기 / EP.02 Before-After 와 다르게). 모든 사실은 공식 changelog 본문 직접 확인분(2026-08-04)만 사용. 방향이 되돌려진 '중첩 소환 차단' 항목은 서사 모순으로 제외.",
+  "topic": "claude-code-brakes",
+  "theme": {
+    "bg": "#F1E9DE",
+    "ink": "#1A1A1A",
+    "inkSoft": "#BCB2A4",
+    "accent": "#E1502A",
+    "muted": "#A0968A",
+    "card": "#EBE1D3",
+    "line": "#DCD1C1",
+    "track": "#E3D8C7"
+  },
+  "meta": {
+    "diary": "바이브용샘 diary EP.03",
+    "total": 9,
+    "handle": "@yongssam.dev",
+    "studio": "무궁무진클래스",
+    "name": "바이브용샘"
+  },
+  "slides": [
+    {
+      "n": 1,
+      "top": 150,
+      "label": "SCROLL STOPPER",
+      "h1": "2주 동안\n*브레이크만 6개*",
+      "ruleW": 500,
+      "sub": "앤트로픽이 클로드 코드에 건 제동장치들.",
+      "note": "브레이크를 단다는 건, 그동안 진짜로 달렸다는 뜻입니다.",
+      "character": "dev",
+      "charStyle": "right:-4px;bottom:118px;width:660px",
+      "swipe": "지금 확인하기"
+    },
+    {
+      "n": 2,
+      "top": 150,
+      "label": "브레이크 01·02 · 상한",
+      "h1": "혼자 검색만 200번\n*하던 게 막혔습니다*",
+      "ruleW": 580,
+      "sub": "세션당 호출 횟수에 천장이 생겼습니다.",
+      "visual": {
+        "type": "stats",
+        "top": 560,
+        "items": [
+          {
+            "t": "웹 검색",
+            "v": "200회",
+            "d": "세션당 상한 신설\n검색 무한루프 차단",
+            "tone": "accent"
+          },
+          {
+            "t": "서브에이전트 소환",
+            "v": "200회",
+            "d": "세션당 상한 신설\n위임 무한루프 차단"
+          }
+        ],
+        "src": "v2.1.213 · 2026-07-17"
+      },
+      "character": "scholar",
+      "charStyle": "right:8px;bottom:126px;width:420px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 3,
+      "top": 150,
+      "label": "브레이크 03 · 자동 검증",
+      "h1": "시키지도 않았는데\n*검사하던 것도 정지*",
+      "ruleW": 600,
+      "sub": "이제는 제가 부를 때만 실행됩니다.",
+      "visual": {
+        "type": "flow",
+        "top": 600,
+        "from": "알아서 자동 실행",
+        "to": "부를 때만 실행",
+        "src": "/verify · /code-review · v2.1.215 · 2026-07-19"
+      },
+      "character": "maker",
+      "charStyle": "right:8px;bottom:126px;width:420px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 4,
+      "top": 150,
+      "label": "브레이크 04 · 동시 실행",
+      "h1": "동시에 부릴 수 있는\n*일꾼은 20명까지*",
+      "ruleW": 600,
+      "sub": "한꺼번에 몇십 개가 돌던 게 정리됐습니다.",
+      "visual": {
+        "type": "dots",
+        "top": 600,
+        "total": 40,
+        "on": 20,
+        "width": 620,
+        "src": "동시 실행 서브에이전트 상한 20개 · v2.1.217 · 2026-07-21"
+      },
+      "character": "dev",
+      "charStyle": "right:8px;bottom:126px;width:420px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 5,
+      "top": 150,
+      "label": "브레이크 05 · 깊은 조사",
+      "h1": "묻지도 않은 조사를\n*스스로 시작하던 것*",
+      "ruleW": 620,
+      "sub": "이제 수동으로 불러야 시작합니다.",
+      "visual": {
+        "type": "flow",
+        "top": 600,
+        "from": "클로드가 알아서 켬",
+        "to": "내가 직접 호출",
+        "src": "/deep-research · v2.1.218 · 2026-07-22"
+      },
+      "character": "fairy",
+      "charStyle": "right:14px;bottom:134px;width:390px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 6,
+      "top": 150,
+      "label": "브레이크 06 · 안전장치",
+      "h1": "격리해뒀는데\n*원본을 건드리던 문제*",
+      "ruleW": 540,
+      "sub": "실험용 복사본이 진짜 폴더를 손대던 경로가 막혔습니다.",
+      "note": "worktree로 안전하게 실험하라던 그 방식의 마지막 구멍이었습니다.",
+      "character": "maker",
+      "charStyle": "right:8px;bottom:126px;width:430px",
+      "swipe": "계속 보기",
+      "visual": {
+        "type": "flow",
+        "top": 640,
+        "from": "격리 세션",
+        "to": "메인 폴더 보호",
+        "src": "파괴적 git 명령 차단 · v2.1.222 · 2026-08-04"
+      }
+    },
+    {
+      "n": 7,
+      "top": 150,
+      "label": "그래서 · 해석",
+      "h1": "기능을 뺀 게 아니라\n*안전벨트를 맨 겁니다*",
+      "ruleW": 620,
+      "sub": "여섯 개가 전부 같은 방향입니다.",
+      "note": "'알아서 해주는 것'에서 '시킬 때만 하는 것'으로.\n자동이 편한 게 아니라, 예측되는 게 편한 거였습니다.",
+      "character": "scholar",
+      "charStyle": "right:8px;bottom:126px;width:420px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 8,
+      "top": 150,
+      "label": "실천 · 오늘 할 것",
+      "h1": "업데이트하고\n*이것만 기억하세요*",
+      "ruleW": 540,
+      "sub": "설정할 건 없습니다. 알고만 계시면 됩니다.",
+      "visual": {
+        "type": "chips",
+        "top": 610,
+        "items": [
+          { "t": "클로드 코드 업데이트" },
+          { "t": "/verify 는 직접 호출" },
+          { "t": "/deep-research 도 직접" },
+          { "t": "사라진 게 아님", "on": true }
+        ],
+        "src": "요금제·지역 제한 없이 모두 적용됩니다"
+      },
+      "character": "teacher",
+      "charStyle": "right:6px;bottom:126px;width:410px",
+      "swipe": "마지막 장"
+    },
+    {
+      "n": 9,
+      "top": 260,
+      "label": "SAVE",
+      "h1": "빨리 달리는 것보다\n*멈출 줄 아는 것*",
+      "ruleW": 600,
+      "sub": "다음에 한도 태울 것 같을 때 다시 보기.",
+      "note": "공식 changelog 기준 · 2026년 8월 4일 확인",
+      "character": "fairy",
+      "charStyle": "right:0px;bottom:130px;width:620px"
+    }
+  ]
+}
