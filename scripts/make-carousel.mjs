@@ -33,10 +33,18 @@
  *   --skip-video     PNG 9장만 (빠른 시안 확인용, --motion none 과 동일)
  *   --duration 3.5   영상 길이(초). 인스타 피드 최소 3초이므로 그 밑으로 내리지 말 것
  *   --gif 1          블로그/스레드용 GIF 동시 출력 (인스타 피드는 GIF 미지원)
+ *   --out-dir <경로>  업로드 세트를 복사할 위치를 직접 지정
+ *   --no-downloads   다운로드 폴더 자동 복사를 끔
+ *
+ * 로컬 저장:
+ *   완료 후 업로드 세트를 `~/Downloads/YYYY-MM-DD_<topic>/` 에 자동 복사합니다.
+ *   (캐러셀 파일 + news.md / caption.md / blog.md 가 있으면 함께)
+ *   다운로드 폴더가 없으면 조용히 건너뜁니다.
  */
 import { spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, copyFileSync, statSync, readdirSync, rmSync, readFileSync } from 'node:fs';
 import { join, resolve, dirname } from 'node:path';
+import { homedir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -200,6 +208,40 @@ if (problems.length) {
   process.exit(1);
 }
 
+// 6) 로컬 다운로드 폴더로 복사 (바로 업로드할 수 있게)
+function findDownloadsDir() {
+  if (args['out-dir']) return resolve(args['out-dir']);
+  if (args['no-downloads']) return null;
+  const home = homedir();
+  // 윈도우/맥은 Downloads, 일부 리눅스 로케일은 다운로드
+  for (const name of ['Downloads', '다운로드']) {
+    const p = join(home, name);
+    if (existsSync(p)) return p;
+  }
+  return null;
+}
+
+let savedTo = null;
+const downloads = findDownloadsDir();
+if (downloads) {
+  const d = new Date();
+  const stamp = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(
+    d.getDate()
+  ).padStart(2, '0')}`;
+  const destRoot = args['out-dir'] ? downloads : join(downloads, `${stamp}_${topic}`);
+  mkdirSync(destRoot, { recursive: true });
+
+  for (const f of readdirSync(uploadDir)) {
+    copyFileSync(join(uploadDir, f), join(destRoot, f));
+  }
+  // 3way 텍스트도 같이 (있을 때만)
+  for (const f of ['news.md', 'caption.md', 'blog.md']) {
+    const src = join(outRoot, f);
+    if (existsSync(src)) copyFileSync(src, join(destRoot, f));
+  }
+  savedTo = destRoot;
+}
+
 const files = readdirSync(uploadDir).sort();
 console.log(`✅ 업로드 폴더 준비 완료 — ${uploadDir}`);
 files.forEach((f) => console.log(`   ${f}`));
@@ -208,5 +250,12 @@ if (!motion.includes(1)) {
   console.log('커버(01)는 정적 PNG — 피드 썸네일이 되는 장이라 영상으로 두지 않았습니다.');
 }
 console.log(`모션 ${motion.length}장 / 정적 ${allNums.length - motion.length}장`);
+if (savedTo) {
+  console.log(`\n💾 로컬 저장 완료 → ${savedTo}`);
+  console.log('   이 폴더를 그대로 열어서 순서대로 올리시면 됩니다.');
+} else if (!args['no-downloads']) {
+  console.log('\nℹ️ 다운로드 폴더를 찾지 못해 로컬 복사를 건너뛰었습니다.');
+  console.log('   위치를 직접 지정하려면: --out-dir <경로>');
+}
 if (!hasEndcard) console.log('⚠️ 책 홍보 엔드카드가 빠져 있습니다 (assets/book-promo-endcard.png).');
 console.log('⚠️ 캡션의 프로필 링크를 이번 게시물에 맞게 교체했는지 확인하세요.\n');
