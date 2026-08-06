@@ -1,0 +1,361 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>무무점프 — 우리 반 게임</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    background:#1b1230;color:#fff;min-height:100dvh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+    font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Malgun Gothic",sans-serif;
+    padding:16px;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;
+  }
+  h1{font-size:20px;letter-spacing:-.02em}
+  h1 span{color:#ffd166}
+  #wrap{position:relative;width:min(100%,900px)}
+  canvas{
+    width:100%;height:auto;display:block;
+    border-radius:16px;background:#87ceeb;box-shadow:0 12px 40px rgba(0,0,0,.45);
+  }
+  #overlay{
+    position:absolute;inset:0;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:14px;text-align:center;
+    background:rgba(27,18,48,.82);border-radius:16px;padding:20px;
+  }
+  #overlay.hide{display:none}
+  #overlay h2{font-size:clamp(22px,5vw,34px);letter-spacing:-.03em}
+  #overlay p{font-size:clamp(13px,2.6vw,16px);color:#cfc6e6;line-height:1.6}
+  button{
+    font:inherit;font-weight:700;font-size:16px;padding:12px 28px;border:0;border-radius:999px;
+    background:#ffd166;color:#3a2a00;cursor:pointer;
+  }
+  button:active{transform:translateY(1px)}
+  .keys{font-size:12px;color:#a99ec6}
+  #pad{display:flex;gap:10px;width:min(100%,900px)}
+  #pad button{flex:1;padding:16px 0;font-size:15px;background:#3a2c5e;color:#fff}
+  @media (hover:hover){#pad{display:none}}
+</style>
+</head>
+<body>
+
+<h1>무무<span>점프</span> — 우리 반 게임</h1>
+
+<div id="wrap">
+  <canvas id="cv" width="900" height="480"></canvas>
+  <div id="overlay">
+    <h2 id="ttl">무무점프</h2>
+    <p id="msg">화살표 ← → 로 움직이고, 스페이스로 점프!<br>당근을 모두 먹고 깃발까지 가면 성공.</p>
+    <button id="btn">시작하기</button>
+    <p class="keys">모바일은 아래 버튼으로 조작하세요</p>
+  </div>
+</div>
+
+<div id="pad">
+  <button data-k="left">◀ 왼쪽</button>
+  <button data-k="jump">▲ 점프</button>
+  <button data-k="right">오른쪽 ▶</button>
+</div>
+
+<script>
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+const W = cv.width, H = cv.height;
+
+const overlay = document.getElementById('overlay');
+const ttl = document.getElementById('ttl');
+const msg = document.getElementById('msg');
+const btn = document.getElementById('btn');
+
+const GRAVITY = 0.62, MOVE = 0.85, MAX_VX = 5.6, FRICTION = 0.82, JUMP = 13.2;
+
+// 발판: x, y, w, h
+const PLATFORMS = [
+  {x:0,   y:430, w:1400, h:50},
+  {x:1500,y:430, w:1300, h:50},
+  {x:260, y:340, w:140,  h:18},
+  {x:470, y:268, w:130,  h:18},
+  {x:700, y:340, w:150,  h:18},
+  {x:960, y:280, w:120,  h:18},
+  {x:1180,y:352, w:140,  h:18},
+  {x:1390,y:300, w:110,  h:18},
+  {x:1600,y:330, w:150,  h:18},
+  {x:1840,y:265, w:130,  h:18},
+  {x:2080,y:340, w:150,  h:18},
+];
+
+const CARROT_SPOTS = [
+  [300,300],[510,228],[745,300],[1000,240],[1220,312],
+  [1420,260],[1650,290],[1885,225],[2130,300],[2320,390]
+];
+const ENEMY_SPOTS = [
+  {x:820, y:398, min:700,  max:1150},
+  {x:1650,y:398, min:1520, max:1780},
+  {x:2200,y:398, min:2060, max:2400},
+];
+const GOAL = {x:2560, y:330, w:16, h:100};
+const WORLD_W = 2800;
+
+let player, carrots, enemies, cam, keys, state, score, best = 0;
+
+function reset(){
+  player = {x:60, y:360, w:34, h:44, vx:0, vy:0, onGround:false, face:1};
+  carrots = CARROT_SPOTS.map(([x,y]) => ({x, y, got:false, t:Math.random()*6}));
+  enemies = ENEMY_SPOTS.map(e => ({...e, w:34, h:32, dir:1, spd:1.5}));
+  cam = 0;
+  keys = {left:false, right:false, jump:false};
+  score = 0;
+  state = 'play';
+}
+
+function rectHit(a, b){
+  return a.x < b.x + b.w && a.x + a.w > b.x && a.y < b.y + b.h && a.y + a.h > b.y;
+}
+
+function update(){
+  if (state !== 'play') return;
+
+  // 좌우 이동
+  if (keys.left)  { player.vx -= MOVE; player.face = -1; }
+  if (keys.right) { player.vx += MOVE; player.face = 1; }
+  if (!keys.left && !keys.right) player.vx *= FRICTION;
+  player.vx = Math.max(-MAX_VX, Math.min(MAX_VX, player.vx));
+
+  // 점프
+  if (keys.jump && player.onGround){ player.vy = -JUMP; player.onGround = false; }
+
+  player.vy += GRAVITY;
+  if (player.vy > 18) player.vy = 18;
+
+  // x축 이동 후 충돌
+  player.x += player.vx;
+  for (const p of PLATFORMS){
+    if (rectHit(player, p)){
+      if (player.vx > 0) player.x = p.x - player.w;
+      else if (player.vx < 0) player.x = p.x + p.w;
+      player.vx = 0;
+    }
+  }
+  player.x = Math.max(0, Math.min(WORLD_W - player.w, player.x));
+
+  // y축 이동 후 충돌
+  player.y += player.vy;
+  player.onGround = false;
+  for (const p of PLATFORMS){
+    if (rectHit(player, p)){
+      if (player.vy > 0){ player.y = p.y - player.h; player.onGround = true; }
+      else if (player.vy < 0) player.y = p.y + p.h;
+      player.vy = 0;
+    }
+  }
+
+  // 구덩이에 빠짐
+  if (player.y > H + 120){ state = 'dead'; showEnd('앗, 떨어졌어요', '다시 해볼까요?'); return; }
+
+  // 당근 먹기
+  for (const c of carrots){
+    if (c.got) continue;
+    c.t += 0.08;
+    if (Math.abs((player.x + player.w/2) - c.x) < 28 &&
+        Math.abs((player.y + player.h/2) - c.y) < 34){
+      c.got = true; score++;
+    }
+  }
+
+  // 적 이동 + 충돌
+  for (const e of enemies){
+    e.x += e.spd * e.dir;
+    if (e.x < e.min || e.x + e.w > e.max) e.dir *= -1;
+    if (rectHit(player, e)){
+      // 위에서 밟으면 처치
+      if (player.vy > 0 && player.y + player.h - e.y < 22){
+        e.dead = true; player.vy = -9; score++;
+      } else if (!e.dead){
+        state = 'dead'; showEnd('부딪혔어요', '다시 해볼까요?'); return;
+      }
+    }
+  }
+  enemies = enemies.filter(e => !e.dead);
+
+  // 골인
+  if (rectHit(player, GOAL)){
+    const all = carrots.every(c => c.got);
+    if (all){
+      state = 'clear';
+      if (score > best) best = score;
+      showEnd('클리어!', `당근 ${score}개를 모았어요. 최고 기록 ${best}개`);
+    } else {
+      const left = carrots.filter(c => !c.got).length;
+      msgFloat = `당근 ${left}개가 남았어요!`;
+      msgFloatT = 90;
+    }
+  }
+
+  // 카메라
+  const target = player.x - W * 0.38;
+  cam += (Math.max(0, Math.min(WORLD_W - W, target)) - cam) * 0.12;
+}
+
+let msgFloat = '', msgFloatT = 0;
+
+function showEnd(t, m){
+  ttl.textContent = t;
+  msg.innerHTML = m;
+  btn.textContent = '다시 하기';
+  overlay.classList.remove('hide');
+}
+
+// ---------- 그리기 ----------
+function drawBg(){
+  const g = ctx.createLinearGradient(0,0,0,H);
+  g.addColorStop(0,'#8ed7f5'); g.addColorStop(1,'#cdeffb');
+  ctx.fillStyle = g; ctx.fillRect(0,0,W,H);
+
+  // 구름
+  ctx.fillStyle = 'rgba(255,255,255,.85)';
+  for (let i=0;i<8;i++){
+    const cx = (i*380 - cam*0.3) % (WORLD_W) ;
+    const cy = 60 + (i%3)*45;
+    ctx.beginPath();
+    ctx.arc(cx,cy,26,0,7); ctx.arc(cx+26,cy+6,20,0,7); ctx.arc(cx-24,cy+8,18,0,7);
+    ctx.fill();
+  }
+  // 언덕
+  ctx.fillStyle = 'rgba(120,200,140,.55)';
+  for (let i=0;i<10;i++){
+    const hx = i*340 - cam*0.55;
+    ctx.beginPath(); ctx.arc(hx, 470, 130, Math.PI, 0); ctx.fill();
+  }
+}
+
+function drawPlatforms(){
+  for (const p of PLATFORMS){
+    const x = p.x - cam;
+    if (x > W || x + p.w < 0) continue;
+    ctx.fillStyle = '#7a4b25';
+    ctx.fillRect(x, p.y, p.w, p.h);
+    ctx.fillStyle = '#57b04a';
+    ctx.fillRect(x, p.y, p.w, Math.min(12, p.h));
+  }
+}
+
+function drawCarrot(c){
+  const x = c.x - cam;
+  if (x < -40 || x > W + 40) return;
+  const bob = Math.sin(c.t) * 4;
+  ctx.save(); ctx.translate(x, c.y + bob);
+  ctx.fillStyle = '#ff8c33';
+  ctx.beginPath(); ctx.moveTo(0,14); ctx.lineTo(-9,-8); ctx.lineTo(9,-8); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = '#43b04a';
+  ctx.fillRect(-3,-16,6,9);
+  ctx.restore();
+}
+
+function drawEnemy(e){
+  const x = e.x - cam;
+  if (x < -60 || x > W + 60) return;
+  ctx.fillStyle = '#8b5cf6';
+  ctx.beginPath(); ctx.roundRect(x, e.y, e.w, e.h, 8); ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.beginPath(); ctx.arc(x+11,e.y+12,5,0,7); ctx.arc(x+24,e.y+12,5,0,7); ctx.fill();
+  ctx.fillStyle = '#241436';
+  ctx.beginPath(); ctx.arc(x+11+e.dir*1.5,e.y+12,2.4,0,7); ctx.arc(x+24+e.dir*1.5,e.y+12,2.4,0,7); ctx.fill();
+}
+
+function drawPlayer(){
+  const x = player.x - cam, y = player.y;
+  // 몸
+  ctx.fillStyle = '#f26d5b';
+  ctx.beginPath(); ctx.roundRect(x, y+16, player.w, player.h-16, 7); ctx.fill();
+  // 얼굴
+  ctx.fillStyle = '#ffd9b8';
+  ctx.beginPath(); ctx.arc(x+player.w/2, y+13, 14, 0, 7); ctx.fill();
+  // 모자
+  ctx.fillStyle = '#e63946';
+  ctx.beginPath(); ctx.arc(x+player.w/2, y+9, 14, Math.PI, 0); ctx.fill();
+  ctx.fillRect(x+player.w/2 - 14 + (player.face>0?6:-6), y+7, 16, 5);
+  // 눈
+  ctx.fillStyle = '#241436';
+  ctx.beginPath(); ctx.arc(x+player.w/2 + player.face*4, y+14, 2.6, 0, 7); ctx.fill();
+}
+
+function drawGoal(){
+  const x = GOAL.x - cam;
+  if (x < -80 || x > W + 80) return;
+  ctx.fillStyle = '#5b4636';
+  ctx.fillRect(x, GOAL.y, GOAL.w, GOAL.h);
+  ctx.fillStyle = '#ffd166';
+  ctx.beginPath();
+  ctx.moveTo(x+GOAL.w, GOAL.y+6); ctx.lineTo(x+GOAL.w+52, GOAL.y+22); ctx.lineTo(x+GOAL.w, GOAL.y+38);
+  ctx.closePath(); ctx.fill();
+}
+
+function drawHud(){
+  const left = carrots.filter(c => !c.got).length;
+  ctx.fillStyle = 'rgba(27,18,48,.55)';
+  ctx.beginPath(); ctx.roundRect(14, 14, 210, 40, 12); ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 19px Pretendard, sans-serif';
+  ctx.fillText(`🥕 ${score}점   남은 당근 ${left}`, 28, 41);
+
+  if (msgFloatT > 0){
+    msgFloatT--;
+    ctx.fillStyle = 'rgba(27,18,48,.75)';
+    ctx.beginPath(); ctx.roundRect(W/2-130, 70, 260, 40, 12); ctx.fill();
+    ctx.fillStyle = '#ffd166';
+    ctx.font = 'bold 18px Pretendard, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText(msgFloat, W/2, 96);
+    ctx.textAlign = 'left';
+  }
+}
+
+function draw(){
+  drawBg();
+  drawPlatforms();
+  drawGoal();
+  for (const c of carrots) if (!c.got) drawCarrot(c);
+  for (const e of enemies) drawEnemy(e);
+  drawPlayer();
+  drawHud();
+}
+
+function loop(){ update(); draw(); requestAnimationFrame(loop); }
+
+// ---------- 입력 ----------
+const KEYMAP = {
+  ArrowLeft:'left', ArrowRight:'right', ' ':'jump',
+  a:'left', d:'right', w:'jump', ArrowUp:'jump'
+};
+addEventListener('keydown', e => {
+  const k = KEYMAP[e.key];
+  if (k){ keys[k] = true; e.preventDefault(); }
+});
+addEventListener('keyup', e => {
+  const k = KEYMAP[e.key];
+  if (k){ keys[k] = false; e.preventDefault(); }
+});
+
+for (const b of document.querySelectorAll('#pad button')){
+  const k = b.dataset.k;
+  const on  = e => { keys[k] = true;  e.preventDefault(); };
+  const off = e => { keys[k] = false; e.preventDefault(); };
+  b.addEventListener('touchstart', on, {passive:false});
+  b.addEventListener('touchend', off, {passive:false});
+  b.addEventListener('mousedown', on);
+  b.addEventListener('mouseup', off);
+  b.addEventListener('mouseleave', off);
+}
+
+btn.addEventListener('click', () => {
+  reset();
+  overlay.classList.add('hide');
+});
+
+reset();
+state = 'ready';
+loop();
+</script>
+</body>
+</html>

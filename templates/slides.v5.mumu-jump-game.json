@@ -1,0 +1,185 @@
+{
+  "_comment": "v5 — '클로드 코드로 우리 반 게임 만들기' 9장. EP.05. 구조는 단계별 튜토리얼(EP.01 통념깨기 / EP.02 Before-After / EP.03 체크리스트 / EP.04 비교가이드와 다르게). 실제로 examples/mumu-jump/index.html 을 만들어 자동 플레이 테스트 5종 통과시킨 뒤 작성. 상표 주의(3번 장)는 반드시 유지할 것.",
+  "topic": "mumu-jump-game",
+  "theme": {
+    "bg": "#F1E9DE",
+    "ink": "#1A1A1A",
+    "inkSoft": "#BCB2A4",
+    "accent": "#E1502A",
+    "muted": "#A0968A",
+    "card": "#EBE1D3",
+    "line": "#DCD1C1",
+    "track": "#E3D8C7"
+  },
+  "meta": {
+    "diary": "바이브용샘 diary EP.05",
+    "total": 9,
+    "handle": "@yongssam.dev",
+    "studio": "무궁무진클래스",
+    "name": "바이브용샘"
+  },
+  "slides": [
+    {
+      "n": 1,
+      "top": 150,
+      "label": "SCROLL STOPPER",
+      "h1": "말로 시켰더니\n*우리 반 게임이 나왔습니다*",
+      "ruleW": 560,
+      "sub": "코드는 한 줄도 안 썼습니다.",
+      "note": "만드는 데 걸린 시간보다, 애들이 하는 걸 보는 시간이 더 길었습니다.",
+      "character": "teacher",
+      "charStyle": "right:-4px;bottom:118px;width:640px",
+      "swipe": "지금 확인하기"
+    },
+    {
+      "n": 2,
+      "top": 150,
+      "label": "1단계 · 뭘 만들까",
+      "h1": "고전 게임이\n*제일 쉽습니다*",
+      "ruleW": 540,
+      "sub": "규칙이 이미 머릿속에 있으니까요.",
+      "visual": {
+        "type": "chips",
+        "top": 600,
+        "items": [
+          { "t": "옆으로 가며 점프", "on": true },
+          { "t": "떨어지는 블록 쌓기" },
+          { "t": "카드 뒤집어 짝 맞추기" },
+          { "t": "두더지 잡기" }
+        ],
+        "src": "설명이 필요 없는 게임일수록 만들기 쉽습니다"
+      },
+      "note": "새로운 걸 만들려 하지 마세요.\n아는 게임이어야 '이게 아닌데'를 말할 수 있습니다.",
+      "character": "maker",
+      "charStyle": "right:8px;bottom:126px;width:400px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 3,
+      "top": 150,
+      "label": "2단계 · 먼저 짚을 것",
+      "h1": "장르는 따라 해도\n*이름은 안 됩니다*",
+      "ruleW": 620,
+      "sub": "마리오, 포켓몬, 카트라이더는 상표입니다.",
+      "visual": {
+        "type": "flow",
+        "top": 610,
+        "from": "무무마리오",
+        "to": "무무점프",
+        "src": "옆으로 가며 점프하는 게임 = 장르. 만들어도 됩니다"
+      },
+      "note": "캐릭터 생김새와 이름만 내 것으로 바꾸면 됩니다.\n반에서만 쓸 거라도 이름은 처음부터 다르게 지으세요.",
+      "character": "scholar",
+      "charStyle": "right:8px;bottom:126px;width:400px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 4,
+      "top": 150,
+      "label": "3단계 · 첫 명령",
+      "h1": "한 문장으로\n*시작합니다*",
+      "ruleW": 540,
+      "sub": "길게 쓸수록 좋아지는 게 아닙니다.",
+      "note": "\"옆으로 가면서 점프하는 게임 만들어줘.\n당근을 다 먹고 깃발에 닿으면 통과.\nHTML 파일 하나로만 만들어줘.\"",
+      "visual": {
+        "type": "chips",
+        "top": 700,
+        "items": [
+          { "t": "뭘 하는 게임인지" },
+          { "t": "언제 끝나는지", "on": true },
+          { "t": "파일은 하나로" }
+        ],
+        "src": "이 세 가지면 첫 판은 나옵니다"
+      },
+      "character": "dev",
+      "charStyle": "right:8px;bottom:126px;width:380px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 5,
+      "top": 150,
+      "label": "4단계 · 고치기",
+      "h1": "한 번에\n*하나씩만*",
+      "ruleW": 480,
+      "sub": "다섯 개를 한꺼번에 말하면 세 개만 고쳐집니다.",
+      "visual": {
+        "type": "flow",
+        "top": 600,
+        "from": "이것저것 다 고쳐줘",
+        "to": "점프가 낮아. 조금만 높여줘",
+        "src": "고친 다음 꼭 직접 해보고 다음 주문으로"
+      },
+      "note": "\"조금\", \"살짝\"도 알아듣습니다.\n숫자를 몰라도 됩니다.",
+      "character": "maker",
+      "charStyle": "right:8px;bottom:126px;width:410px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 6,
+      "top": 150,
+      "label": "5단계 · 막혔을 때",
+      "h1": "안 된다고 하기 전에\n*말 안 한 규칙을 찾으세요*",
+      "ruleW": 640,
+      "sub": "대부분은 고장이 아니라 안 알려준 겁니다.",
+      "note": "저는 깃발에 닿기만 하면 끝나버려서 한참 봤습니다.\n\"당근을 다 먹어야 통과\"를 안 말했더군요.\n한 줄 더 말하니 바로 됐습니다.",
+      "character": "fairy",
+      "charStyle": "right:14px;bottom:134px;width:380px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 7,
+      "top": 150,
+      "label": "6단계 · 배포",
+      "h1": "파일 하나면\n*인터넷에 올라갑니다*",
+      "ruleW": 560,
+      "sub": "설치할 것도, 서버도 필요 없습니다.",
+      "visual": {
+        "type": "chips",
+        "top": 600,
+        "items": [
+          { "t": "index.html 하나만 준비" },
+          { "t": "무료 호스팅에 끌어다 놓기" },
+          { "t": "주소가 바로 생김", "on": true }
+        ],
+        "src": "HTML 파일 하나짜리로 만들어달라고 한 이유가 여기 있습니다"
+      },
+      "note": "처음부터 \"파일 하나로\"라고 시킨 게 여기서 값을 합니다.",
+      "character": "dev",
+      "charStyle": "right:8px;bottom:126px;width:390px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 8,
+      "top": 150,
+      "label": "7단계 · 교실에서",
+      "h1": "링크 하나로\n*반 전체가 합니다*",
+      "ruleW": 560,
+      "sub": "설치도, 계정도, 로그인도 없습니다.",
+      "note": "칠판에 주소만 띄우면 각자 기기에서 바로 들어옵니다.\n쉬는 시간 5분짜리로 딱입니다.",
+      "visual": {
+        "type": "chips",
+        "top": 640,
+        "items": [
+          { "t": "주소 띄우기" },
+          { "t": "각자 기기에서 접속" },
+          { "t": "이름은 우리 반 것으로", "on": true }
+        ],
+        "src": "아이들 이름을 넣어달라고 하면 더 좋아합니다"
+      },
+      "character": "teacher",
+      "charStyle": "right:6px;bottom:126px;width:390px",
+      "swipe": "마지막 장"
+    },
+    {
+      "n": 9,
+      "top": 260,
+      "label": "SAVE",
+      "h1": "오늘 저녁에\n*하나 만들어보세요*",
+      "ruleW": 600,
+      "sub": "안 되면 다시 말하면 됩니다. 그게 전부입니다.",
+      "note": "만들다 막히면 댓글로 물어보세요.",
+      "character": "fairy",
+      "charStyle": "right:0px;bottom:130px;width:600px"
+    }
+  ]
+}
