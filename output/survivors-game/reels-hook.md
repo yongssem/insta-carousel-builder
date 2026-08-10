@@ -185,6 +185,55 @@ AI 생성 영상을 후킹에 쓰면 안 됩니다. 4초에 본 화면과 실제
 
 ---
 
+## "선생님이 캐릭터가 되는" 연출 — 어떻게 할 것인가
+
+### ❌ 하지 말 것: 탕탕특공대 캐릭터로 분한 영상
+
+`탕탕특공대`는 Habby 의 Survivor.io 한국 서비스명입니다.
+**장르(뱀서라이크)는 자유지만 특정 게임의 캐릭터 디자인을 차용하는 건 다릅니다.**
+릴스는 캐러셀보다 도달이 넓어 걸릴 확률도 높습니다.
+
+### ❌ 후킹 4초에 실사 시네마틱을 끼우는 것도 반대
+
+1. **4초에 세 가지가 안 들어갑니다.** 실사 컷 + 게임 화면 + 프롬프트를 다 넣으면
+   셋 다 스쳐 지나갑니다. A안의 핵심인 "프롬프트를 4초 안에 보여주기"가 죽습니다
+2. **기대 배반.** 실사 액션을 보고 들어왔는데 결과물이 도트 게임이면 그 격차가 이탈이 됩니다
+3. **원칙 충돌.** 이 문서 맨 앞에서 "게임 화면에 AI 생성 영상 쓰지 않기"를 정했는데,
+   좀비 처치 영상은 사실상 게임 장면입니다
+
+### ⭐ 대신: 게임 캐릭터를 실제로 선생님으로 만듭니다
+
+발상 자체는 좋습니다. **영상으로 흉내 내지 말고 진짜로 구현하면** 됩니다.
+
+- 플레이어 캐릭터 스프라이트를 **바이브용샘 치비**로 교체
+- `assets/characters/` 에 이미 같은 화풍의 3D 치비 5종(dev·maker·teacher·scholar·fairy)이 있습니다.
+  같은 `common_style` 로 한 개만 더 생성하면 화풍이 그대로 이어집니다
+- 게임 배경 위에 얹어야 하므로 **배경은 크림색(#F3EEE2)이 아니라 투명**으로 뽑아야 합니다
+  (캐러셀용 캐릭터와 다른 점 — 그대로 쓰면 사각형 자국이 남습니다)
+
+이렇게 하면,
+
+| | 시네마틱 영상 | 캐릭터 교체 |
+|:---|:---|:---|
+| 상표 위험 | 있음 | 없음 |
+| 실제 결과물과 일치 | ✗ | ✓ |
+| 4초 예산 소모 | 큼 | 0 (게임 화면이 곧 그 화면) |
+| 재사용 | 이 릴스 한 번 | 앞으로 만드는 모든 게임에 |
+
+**후킹 0~1.3초에 나오는 게임 화면에 이미 선생님이 들어 있게 됩니다.**
+따로 컷을 쓸 필요가 없어집니다.
+
+### 적은 좀비 말고 다른 걸 권합니다
+
+교사 계정입니다. 초등 아이들과 학부모가 봅니다.
+**좀비를 처치하는 화면은 톤이 안 맞을 수 있습니다.**
+
+- 보라색 말랑한 덩어리(슬라임/블롭) — 이미 무무점프 적이 이 계열입니다
+- 종이 뭉치, 밀린 서류, 알림장 — 교사 정서에 꽂히는 쪽
+- "쌓인 업무"를 적으로 두면 **공감 소재**가 되면서 댓글이 붙습니다
+
+마지막 안은 이 계정에서 꽤 셉니다. 게임이 곧 농담이 됩니다.
+
 ## AI 영상을 쓴다면 (게임 화면 외 컷 한정)
 
 전환컷이나 배경으로만. **게임 플레이 장면은 절대 생성하지 마세요.**
@@ -200,6 +249,22 @@ Overhead shot of three tablets on a wooden desk, screens glowing,
 children's hands reaching in from the edges of frame. Faces not visible.
 Soft natural light. Slow push-in. 3 seconds.
 ```
+
+그래도 "선생님이 싸우는" 컷을 꼭 쓰고 싶다면, **실사 대신 치비 화풍으로** 뽑으세요.
+기존 캐릭터 자산과 화풍이 이어져서 광고 소재처럼 붕 뜨지 않습니다.
+**넣을 자리는 후킹이 아니라 릴스 마지막 2초(아웃트로)** 입니다.
+
+```
+3D chibi character with an oversized head and small rounded body, soft matte
+clay-like material, wearing a navy zip-up hoodie, standing in a simple stylized
+field. Soft purple blob creatures slowly approach from all sides. The character
+calmly raises one hand and a gentle ring of light pushes the blobs away.
+Warm soft studio lighting, soft drop shadow, friendly and playful, not scary.
+Static camera, 3 seconds, no text, no logos.
+```
+
+- `no logos` 를 넣은 건 모델이 임의로 상표 비슷한 걸 그려 넣는 걸 막기 위해서입니다
+- 좀비가 아니라 `soft purple blob creatures` 로 잡았습니다. 교사 계정 톤에 맞고 IP 위험도 없습니다
 
 두 컷 모두 **얼굴이 들어가지 않게** 프롬프트에 명시했습니다.
 AI 생성 영상을 쓰면 캡션이나 화면에 그 사실을 밝히세요.
