@@ -156,11 +156,17 @@ if (wantVideo) {
 }
 
 // 3) 엔드카드 (원본이 있을 때만)
+//
+// 번호는 본문 장수를 따라간다. 본문이 6장이면 엔드카드는 slide-07 이다.
+// 10 으로 고정해 두면 6장 캐러셀에서 07~09 가 빈 채로 10 만 붙어
+// 인스타에서 순서가 어긋난다.
+const endN = allNums.length + 1;
+const endNN = String(endN).padStart(2, '0');
 const promo = join(REPO_ROOT, 'assets', 'book-promo-endcard.png');
 let hasEndcard = false;
 if (existsSync(promo)) {
-  run('엔드카드 4:5 변환', NODE, ['scripts/make-endcard.js', '--topic', topic]);
-  hasEndcard = existsSync(join(outRoot, 'slide-10.png'));
+  run('엔드카드 4:5 변환', NODE, ['scripts/make-endcard.js', '--topic', topic, '--n', String(endN)]);
+  hasEndcard = existsSync(join(outRoot, `slide-${endNN}.png`));
 } else {
   console.log('\n▶ 엔드카드 건너뜀 — assets/book-promo-endcard.png 없음 (assets/README.md 참고)');
 }
@@ -180,7 +186,9 @@ for (const n of allNums) {
     copyFileSync(join(outRoot, `slide-${nn}.png`), join(uploadDir, `${base}.png`));
   }
 }
-if (hasEndcard) copyFileSync(join(outRoot, 'slide-10.png'), join(uploadDir, '10-endcard.png'));
+if (hasEndcard) {
+  copyFileSync(join(outRoot, `slide-${endNN}.png`), join(uploadDir, `${endNN}-endcard.png`));
+}
 
 // 5) 검증 — 오래된 산출물이 섞이지 않았는지
 const problems = [];

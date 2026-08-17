@@ -4,16 +4,19 @@
  *
  * 2 모드:
  *   1. JSON 검증: --prompt templates/slides.<topic>.json
- *      - 9장 구조, common_style 존재, n 1~9 순차, role/prompt 필수
+ *      - 본문 장수(6 또는 9), common_style 존재, n 순차, role/prompt 필수
  *   2. PNG 검증: --dir output/<topic>
- *      - 9장 PNG 존재, 1080×1350 해상도, 파일 크기 분포
+ *      - PNG 번호 연속성, 엔드카드 유무, 1080×1350 해상도, 파일 크기 분포
  *
  * 사용법:
  *   node scripts/quality-check.js --prompt templates/slides.claude-code.json
  *   node scripts/quality-check.js --dir output/claude-code-tips
  */
 import { readFileSync, existsSync, readdirSync, statSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const REPO_ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 function parseArgs(argv) {
   const args = {};
@@ -46,8 +49,9 @@ function checkPromptJson(path) {
     errors.push('slides 배열 누락');
     return { status: 'FAIL', errors };
   }
-  if (data.slides.length !== 9) {
-    warnings.push(`슬라이드 ${data.slides.length}장 (권장: 9장)`);
+  // 본문 6장(기본) 또는 9장(단계형). 그 밖의 값만 경고한다
+  if (![6, 9].includes(data.slides.length)) {
+    warnings.push(`슬라이드 ${data.slides.length}장 (권장: 6장, 단계형은 9장)`);
   }
 
   for (let i = 0; i < data.slides.length; i++) {
@@ -84,19 +88,37 @@ function checkPngDir(dir) {
   const warnings = [];
   const sizes = [];
 
-  // 본문 9장 필수. 10번째는 고정 엔드카드(책 홍보)로 허용.
-  const expected = Array.from({ length: 9 }, (_, i) => `slide-${String(i + 1).padStart(2, '0')}.png`);
-  for (const name of expected) {
-    if (!files.includes(name)) errors.push(`${name} 누락`);
+  // 본문 장수는 고정이 아니다 — 6장(기본)과 9장(단계형)을 둘 다 쓴다.
+  // 마지막 장이 엔드카드이므로, 번호가 1부터 빈틈없이 이어지는지만 본다.
+  const nums = files
+    .map((f) => Number(/^slide-(\d+)\.png$/.exec(f)?.[1]))
+    .filter((n) => Number.isFinite(n))
+    .sort((a, b) => a - b);
+
+  if (nums.length === 0) {
+    errors.push('slide-*.png 를 찾지 못했습니다');
+  } else {
+    for (let i = 0; i < nums.length; i += 1) {
+      if (nums[i] !== i + 1) {
+        errors.push(`슬라이드 번호가 끊깁니다 — ${i + 1}번이 없습니다 (있는 번호: ${nums.join(', ')})`);
+        break;
+      }
+    }
   }
 
-  const hasEndcard = files.includes('slide-10.png');
-  const allowed = hasEndcard ? 10 : 9;
-  if (files.length !== allowed) {
-    errors.push(`slide-*.png ${files.length}장 (기대: 9장, 엔드카드 포함 시 10장)`);
-  }
+  // 엔드카드는 본문 다음 번호. 총 장수로는 판정할 수 없어서 파일로 확인한다.
+  const last = nums.at(-1) ?? 0;
+  const endPath = join(dir, `slide-${String(last).padStart(2, '0')}.png`);
+  const promo = join(REPO_ROOT, 'assets', 'book-promo-endcard.png');
+  const hasEndcard = last >= 2 && existsSync(promo) && statSync(endPath).size > 1_500_000;
+
+  const body = hasEndcard ? last - 1 : last;
+  if (body < 4) warnings.push(`본문 ${body}장 — 너무 짧습니다 (권장 6장, 단계형은 9장)`);
+  if (body > 11) warnings.push(`본문 ${body}장 — 12장을 넘기면 완독률이 크게 떨어집니다`);
   if (!hasEndcard) {
-    warnings.push('slide-10.png (책 홍보 엔드카드) 없음 — node scripts/make-endcard.js --topic <topic>');
+    warnings.push(
+      `책 홍보 엔드카드 없음 — node scripts/make-endcard.js --topic <topic> --n ${last + 1}`,
+    );
   }
 
   for (const f of files) {
@@ -139,7 +161,7 @@ function main() {
   }
 
   console.log(`\n${icon(result.status)} 상태: ${result.status}`);
-  console.log(`   슬라이드 수: ${result.slide_count ?? '?'} / 9`);
+  console.log(`   슬라이드 수: ${result.slide_count ?? '?'}장`);
 
   if (result.errors && result.errors.length > 0) {
     console.log('\n❌ Errors:');

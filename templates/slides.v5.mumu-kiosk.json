@@ -1,0 +1,123 @@
+{
+  "_comment": "v5 — '무무키오스크' 본문 6장. EP.06. 6장 기본 포맷의 첫 편. 구조는 '안 넣은 것 먼저'(EP.01~05 와 다르게). 카페 게시글(output/mumu-kiosk-promo)의 인스타판이라 같은 문장을 그대로 쓰지 않는다.",
+  "topic": "mumu-kiosk",
+  "theme": {
+    "bg": "#F1E9DE",
+    "ink": "#1A1A1A",
+    "inkSoft": "#BCB2A4",
+    "accent": "#E1502A",
+    "muted": "#A0968A",
+    "card": "#EBE1D3",
+    "line": "#DCD1C1",
+    "track": "#E3D8C7"
+  },
+  "meta": {
+    "diary": "바이브용샘 diary EP.06",
+    "total": 6,
+    "handle": "@yongssam.dev",
+    "studio": "무궁무진클래스",
+    "name": "바이브용샘"
+  },
+  "slides": [
+    {
+      "n": 1,
+      "top": 150,
+      "label": "SCROLL STOPPER",
+      "h1": "학급화폐\n*3주면 밀리는 이유*",
+      "ruleW": 540,
+      "sub": "스티커 붙이고, 종이돈 세고, 엑셀에 적고.",
+      "note": "매년 그러다 흐지부지됐습니다. 그래서 다르게 만들어봤어요.",
+      "character": "teacher",
+      "charStyle": "right:-4px;bottom:118px;width:640px",
+      "swipe": "지금 확인하기"
+    },
+    {
+      "n": 2,
+      "top": 150,
+      "label": "먼저 · 일부러 뺀 것",
+      "h1": "기능보다\n*이걸 먼저 말할게요*",
+      "ruleW": 600,
+      "sub": "못 만들어서가 아니라 교실에 해로워서 뺐습니다.",
+      "visual": {
+        "type": "chips",
+        "top": 600,
+        "items": [
+          { "t": "벌점 · 공개 감점" },
+          { "t": "잔액 · 순위 상시 공개" },
+          { "t": "AI가 아이 평가하기" },
+          { "t": "전부 없습니다", "on": true }
+        ],
+        "src": "총액을 비교하면 먼저 시작한 아이가 무조건 이깁니다"
+      },
+      "note": "앞에 세우는 건 '이번 주 가장 많이 성장한 사람'입니다.",
+      "character": "scholar",
+      "charStyle": "right:8px;bottom:126px;width:400px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 3,
+      "top": 150,
+      "label": "아이 · 한 명당 30초",
+      "h1": "가입도 로그인도\n*없습니다*",
+      "ruleW": 560,
+      "sub": "교실 앞 태블릿을 지나가다 툭 누르면 시작됩니다.",
+      "visual": {
+        "type": "chips",
+        "top": 600,
+        "items": [
+          { "t": "내 번호 누르기" },
+          { "t": "개인코드 4자리" },
+          { "t": "출석 · 코인 · 상점" },
+          { "t": "30초 뒤 자동 로그아웃", "on": true }
+        ],
+        "src": "앞사람 계정에 뒷사람이 들어가는 사고를 구조로 막았습니다"
+      },
+      "note": "태블릿 한 대로 스무 명이 돌려 씁니다.",
+      "character": "dev",
+      "charStyle": "right:8px;bottom:126px;width:390px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 4,
+      "top": 150,
+      "label": "코인만으론 안 됩니다",
+      "h1": "쓰면 줄지만\n*줄지 않는 것도 있어요*",
+      "ruleW": 640,
+      "sub": "성실 · 지혜 · 온기 · 용기 · 절제 · 창의가 같이 오릅니다.",
+      "visual": {
+        "type": "flow",
+        "top": 610,
+        "from": "코인 — 쓰면 줄어듦",
+        "to": "스탯 — 줄지 않음",
+        "src": "직업 13계열 · 5단계 승급 · 승급하면 아바타가 실제로 바뀝니다"
+      },
+      "note": "능력치가 오르는 아이템은 팔지 않습니다.\n돈으로 성장을 사면 그 순간 성장이 의미를 잃어서요.",
+      "character": "maker",
+      "charStyle": "right:8px;bottom:126px;width:400px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 5,
+      "top": 150,
+      "label": "전자칠판",
+      "h1": "아이가 승급하면\n*칠판이 터집니다*",
+      "ruleW": 620,
+      "sub": "태블릿에서 누른 게 교실 앞 화면으로 이어집니다.",
+      "note": "타이머 · 뽑기 · 모둠 짜기 · 신호등을 자석처럼 붙였다 뗍니다.\n칠판에는 좋은 일만 뜹니다 — 코인도 순위도 감점도 올라가지 않습니다.",
+      "character": "fairy",
+      "charStyle": "right:14px;bottom:134px;width:380px",
+      "swipe": "마지막 장"
+    },
+    {
+      "n": 6,
+      "top": 240,
+      "label": "SAVE",
+      "h1": "2학기에\n*한번 써보세요*",
+      "ruleW": 520,
+      "sub": "무료입니다. 앞으로도 무료입니다.",
+      "note": "가입 없이 둘러보기만 해도 아이들 화면을 만져볼 수 있어요.\n프로필 링크에 주소 있습니다.",
+      "character": "teacher",
+      "charStyle": "right:0px;bottom:130px;width:580px"
+    }
+  ]
+}
