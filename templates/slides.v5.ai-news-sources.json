@@ -1,0 +1,121 @@
+{
+  "_comment": "v5 — '교사용 AI 뉴스 출처 3곳' 본문 6장. EP.09. 구조는 큐레이션 + 주기 재설계. 세 곳 모두 2026-08-17 확인. ⚠️ Stanford HAI AI Index 는 이 컨테이너에서 접속이 막혀 검색 요약만 봤으므로 그쪽 수치를 캐러셀에 인용하지 않았다 — 출처 소개까지만. 5번 장(2차 출처는 발견용)은 sources.md 의 원칙을 그대로 옮긴 것이라 빼지 말 것.",
+  "topic": "ai-news-sources",
+  "theme": {
+    "bg": "#F1E9DE",
+    "ink": "#1A1A1A",
+    "inkSoft": "#BCB2A4",
+    "accent": "#E1502A",
+    "muted": "#A0968A",
+    "card": "#EBE1D3",
+    "line": "#DCD1C1",
+    "track": "#E3D8C7"
+  },
+  "meta": {
+    "diary": "바이브용샘 diary EP.09",
+    "total": 6,
+    "handle": "@yongssam.dev",
+    "studio": "무궁무진클래스",
+    "name": "바이브용샘"
+  },
+  "slides": [
+    {
+      "n": 1,
+      "top": 150,
+      "label": "SCROLL STOPPER",
+      "h1": "AI 뉴스\n*매일 안 봐도 됩니다*",
+      "ruleW": 560,
+      "sub": "세 곳만 정해두면 감은 안 죽습니다.",
+      "note": "매일 보려다 지쳐서 아예 끊는 게 제일 안 좋습니다.",
+      "character": "teacher",
+      "charStyle": "right:-4px;bottom:118px;width:630px",
+      "swipe": "지금 확인하기"
+    },
+    {
+      "n": 2,
+      "top": 150,
+      "label": "첫째 · 한 달에 한 번",
+      "h1": "국내 교육은\n*여기가 본진입니다*",
+      "ruleW": 580,
+      "sub": "KERIS 한국교육학술정보원.",
+      "note": "'IDEAR BRIEF'가 특히 좋습니다. 짧고, 한국어고, 무료예요.\n해외 통계보다 이쪽이 우리 교실에 훨씬 가깝습니다.\n연수·정책이 바뀌기 전에 여기 먼저 뜹니다.",
+      "character": "scholar",
+      "charStyle": "right:8px;bottom:126px;width:400px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 3,
+      "top": 150,
+      "label": "둘째 · 2주에 한 번",
+      "h1": "내가 쓰는 도구\n*하나만 정하세요*",
+      "ruleW": 600,
+      "sub": "공식 체인지로그·뉴스 페이지를 북마크합니다.",
+      "visual": {
+        "type": "chips",
+        "top": 610,
+        "items": [
+          {
+            "t": "클로드 · 클로드 코드"
+          },
+          {
+            "t": "챗GPT"
+          },
+          {
+            "t": "제미나이"
+          },
+          {
+            "t": "쓰는 것 하나만",
+            "on": true
+          }
+        ],
+        "src": "다 보려고 하면 하나도 안 보게 됩니다"
+      },
+      "note": "무료로 풀린 기능과 요금 변경만 보시면 됩니다.\n나머지는 대부분 개발자 얘기예요.",
+      "character": "dev",
+      "charStyle": "right:8px;bottom:126px;width:390px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 4,
+      "top": 150,
+      "label": "셋째 · 필요할 때만",
+      "h1": "숫자가 필요하면\n*여기서 가져오세요*",
+      "ruleW": 620,
+      "sub": "스탠퍼드 HAI의 AI Index, 교육 챕터.",
+      "note": "연수 자료나 학부모 안내에 숫자를 넣어야 할 때가 있잖아요.\n그때 블로그에서 주워 오지 말고 여기서 가져오시면 됩니다.\n영어지만 번역해서 보면 되고, 1년에 한 번만 열어도 충분합니다.",
+      "character": "maker",
+      "charStyle": "right:8px;bottom:126px;width:390px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 5,
+      "top": 150,
+      "label": "그리고 · 이건 조심",
+      "h1": "요약 채널은\n*근거가 아닙니다*",
+      "ruleW": 580,
+      "sub": "보는 건 좋습니다. 인용을 하지 마세요.",
+      "visual": {
+        "type": "flow",
+        "top": 640,
+        "from": "요약 영상·뉴스레터",
+        "to": "찾는 용도로만",
+        "src": "숫자는 반드시 원문까지 거슬러 올라가서 확인"
+      },
+      "note": "저도 출처를 못 찾아 숫자를 통째로 버린 적이 있습니다.\n숫자 하나로 그동안 쌓은 신뢰가 같이 날아갑니다.",
+      "character": "fairy",
+      "charStyle": "right:14px;bottom:134px;width:370px",
+      "swipe": "마지막 장"
+    },
+    {
+      "n": 6,
+      "top": 240,
+      "label": "SAVE",
+      "h1": "오늘 세 개만\n*북마크해두세요*",
+      "ruleW": 540,
+      "sub": "그리고 나머지 알림은 꺼도 됩니다.",
+      "note": "감을 유지하는 건 많이 보는 게 아니라 안 끊기는 겁니다.\n2026년 8월 기준이고, 셋 다 무료입니다.",
+      "character": "teacher",
+      "charStyle": "right:0px;bottom:130px;width:570px"
+    }
+  ]
+}
