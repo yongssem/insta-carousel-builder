@@ -1,0 +1,112 @@
+{
+  "_comment": "v5 — 'SEO에서 GEO로' 본문 6장. EP.10. 정적 PNG 전용(--skip-video). 사실 확인: GEO 는 arXiv 2311.09735 / KDD 2024, Aggarwal 외, Princeton·IIT Delhi. GEO-bench 질의 1만 개, 가시성 최대 40% 향상, 가장 효과적인 세 방법은 출처 인용·인용문·통계 추가. ⚠️ 'SEO 는 죽었다'로 단정하지 말 것 — 논문도 그런 주장을 하지 않는다. 4~5번 장의 교사 연결(좋은 글쓰기 = GEO)이 이 편의 핵심이라 빼지 말 것.",
+  "topic": "seo-to-geo",
+  "theme": {
+    "bg": "#F1E9DE",
+    "ink": "#1A1A1A",
+    "inkSoft": "#BCB2A4",
+    "accent": "#E1502A",
+    "muted": "#A0968A",
+    "card": "#EBE1D3",
+    "line": "#DCD1C1",
+    "track": "#E3D8C7"
+  },
+  "meta": {
+    "diary": "바이브용샘 diary EP.10",
+    "total": 6,
+    "handle": "@yongssam.dev",
+    "studio": "무궁무진클래스",
+    "name": "바이브용샘"
+  },
+  "slides": [
+    {
+      "n": 1,
+      "top": 150,
+      "label": "SCROLL STOPPER",
+      "h1": "이제 검색이 아니라\n*AI한테 물어봅니다*",
+      "ruleW": 620,
+      "sub": "SEO 자리에 GEO라는 말이 올라왔습니다.",
+      "note": "우리 반 아이들도 이미 그렇게 하고 있더라고요.",
+      "character": "teacher",
+      "charStyle": "right:-4px;bottom:118px;width:630px",
+      "swipe": "지금 확인하기"
+    },
+    {
+      "n": 2,
+      "top": 150,
+      "label": "GEO가 뭔가",
+      "h1": "검색 순위가 아니라\n*AI 답변에 들어가는 것*",
+      "ruleW": 640,
+      "sub": "Generative Engine Optimization.",
+      "visual": {
+        "type": "flow",
+        "top": 610,
+        "from": "검색 결과 1페이지",
+        "to": "AI 답변 속 인용",
+        "src": "프린스턴·IIT델리 연구팀 논문에서 나온 말 · KDD 2024"
+      },
+      "note": "지어낸 유행어가 아니라 학회 논문에서 나온 용어입니다.\n질의 1만 개로 실험했어요.",
+      "character": "scholar",
+      "charStyle": "right:8px;bottom:126px;width:400px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 3,
+      "top": 150,
+      "label": "실험 결과",
+      "h1": "이 세 가지를 넣으면\n*최대 40% 올랐습니다*",
+      "ruleW": 640,
+      "sub": "AI가 인용해 갈 확률이요.",
+      "visual": {
+        "type": "chips",
+        "top": 600,
+        "items": [
+          { "t": "출처를 밝힌 글" },
+          { "t": "인용문이 들어간 글" },
+          { "t": "숫자가 들어간 글" },
+          { "t": "이 셋이 1·2·3위", "on": true }
+        ],
+        "src": "GEO-bench 질의 1만 개 실험 · arXiv 2311.09735"
+      },
+      "note": "키워드를 많이 박는 건 효과가 거의 없었습니다.",
+      "character": "dev",
+      "charStyle": "right:8px;bottom:126px;width:390px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 4,
+      "top": 150,
+      "label": "그런데 이거 낯익죠",
+      "h1": "우리가 아이들한테\n*가르치는 거잖아요*",
+      "ruleW": 620,
+      "sub": "출처 밝히기, 근거 들기, 숫자로 말하기.",
+      "note": "AI에게 인용되는 방법이 좋은 글쓰기와 같았습니다.\n새로 배울 기술이 아니라, 원래 하던 걸 계속 하는 쪽이에요.\n검색 잘 되게 키워드 욱여넣던 시절이 오히려 이상했던 겁니다.",
+      "character": "maker",
+      "charStyle": "right:8px;bottom:126px;width:390px",
+      "swipe": "계속 보기"
+    },
+    {
+      "n": 5,
+      "top": 150,
+      "label": "교실에서는",
+      "h1": "\"검색해서 찾아보세요\"가\n*안 통합니다*",
+      "ruleW": 660,
+      "sub": "아이들이 검색창을 안 열어요. 바로 물어봅니다.",
+      "note": "찾는 과제가 아니라 확인하는 과제로 바뀌어야 합니다.\n\"AI가 뭐라고 했는지\"보다 \"그걸 어디서 확인했는지\"를 묻는 쪽으로요.\n출처를 확인하는 습관이 곧 정보 리터러시가 됐습니다.",
+      "character": "fairy",
+      "charStyle": "right:14px;bottom:134px;width:370px",
+      "swipe": "마지막 장"
+    },
+    {
+      "n": 6,
+      "top": 240,
+      "label": "SAVE",
+      "h1": "결론은\n*싱겁습니다*",
+      "ruleW": 460,
+      "sub": "출처 밝히고, 근거 대고, 숫자로 쓰기.",
+      "note": "블로그를 쓰시든 학습지를 만드시든 똑같습니다.\nSEO가 끝난 게 아니라, 기본이 더 중요해진 거예요.\n논문 기준 · 2026년 8월 확인",
+      "character": "teacher",
+      "charStyle": "right:0px;bottom:130px;width:570px"
+    }
+  ]
+}
