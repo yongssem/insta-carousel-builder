@@ -41,12 +41,21 @@ function mark(s) {
     .replace(/\n/g, '<br>');
 }
 
-const CSS = (T) => `
-  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+const CSS = (T, fontRel) => `
+  /* 폰트는 저장소 자산에서 직접 읽는다.
+     예전에는 jsdelivr 에서 Pretendard 를 @import 했는데, 그 주소가 막힌 환경에서는
+     조용히 실패하고 한글이 시스템 폴백(리눅스에서는 중국어 폰트)으로 떨어졌다.
+     assets/fonts/README.md 참고. */
+  @font-face{font-family:'PlexKR';font-weight:400;font-style:normal;font-display:block;
+    src:url('${fontRel}/IBMPlexSansKR-Regular.ttf') format('truetype')}
+  @font-face{font-family:'PlexKR';font-weight:600;font-style:normal;font-display:block;
+    src:url('${fontRel}/IBMPlexSansKR-SemiBold.ttf') format('truetype')}
+  @font-face{font-family:'PlexKR';font-weight:700;font-style:normal;font-display:block;
+    src:url('${fontRel}/IBMPlexSansKR-Bold.ttf') format('truetype')}
   *{margin:0;padding:0;box-sizing:border-box}
   body{
     width:1080px;height:1350px;background:${T.bg};
-    font-family:'Pretendard Variable',sans-serif;color:${T.ink};
+    font-family:'PlexKR',sans-serif;color:${T.ink};
     overflow:hidden;position:relative;
   }
   .serif{font-family:Georgia,'Times New Roman',serif}
@@ -58,16 +67,16 @@ const CSS = (T) => `
   .head .rt{font-variant-numeric:tabular-nums;letter-spacing:0.06em}
 
   /* 배경 고스트 넘버 */
-  .ghost{position:absolute;right:56px;top:300px;font-size:300px;font-weight:800;
+  .ghost{position:absolute;right:56px;top:300px;font-size:300px;font-weight:700;
          line-height:.8;color:rgba(26,26,26,.055);letter-spacing:-0.04em;z-index:0}
 
   /* 라벨 */
-  .label{font-size:23px;font-weight:800;letter-spacing:.18em;color:${T.accent};
+  .label{font-size:23px;font-weight:700;letter-spacing:.18em;color:${T.accent};
          display:flex;align-items:center;gap:14px}
   .label b{font-size:18px;transform:translateY(-1px)}
 
   /* 헤드라인 */
-  h1{font-size:60px;font-weight:800;line-height:1.24;letter-spacing:-0.035em;
+  h1{font-size:60px;font-weight:700;line-height:1.24;letter-spacing:-0.035em;
      word-break:keep-all;margin-top:18px}
   h1 .hl{color:${T.accent}}
   .rule{height:5px;background:${T.accent};border-radius:3px;margin-top:26px}
@@ -83,7 +92,7 @@ const CSS = (T) => `
   .swipe{bottom:150px;font-size:30px;font-weight:700;color:${T.accent};z-index:2}
   .swipe i{font-size:31px}
   .foot{bottom:64px;display:flex;justify-content:space-between;align-items:baseline;z-index:2}
-  .foot .h{font-size:27px;font-weight:800;letter-spacing:-0.01em}
+  .foot .h{font-size:27px;font-weight:700;letter-spacing:-0.01em}
   /* 핸들 옆 표시이름 — 같은 줄, 위계만 낮춤 */
   .foot .h em{font-style:normal;font-weight:600;color:${T.muted};margin-left:12px;font-size:25px}
   .foot .s{font-size:26px;font-weight:600;color:${T.muted}}
@@ -98,7 +107,7 @@ const CSS = (T) => `
   .brhead{display:flex;justify-content:space-between;align-items:baseline;
           gap:20px;margin-bottom:13px}
   .barrow .k{font-size:29px;font-weight:700;letter-spacing:-0.015em}
-  .barrow .v{font-size:29px;font-weight:800;letter-spacing:-0.015em;
+  .barrow .v{font-size:29px;font-weight:700;letter-spacing:-0.015em;
              white-space:nowrap;text-align:right}
   .barrow .v.muted{color:${T.muted}}
   .barrow .v.accent{color:${T.accent}}
@@ -109,8 +118,8 @@ const CSS = (T) => `
 
   .statwrap{display:flex;gap:22px}
   .stat{flex:1;padding:38px 34px}
-  .stat .t{font-size:27px;font-weight:800;letter-spacing:.03em;color:${T.muted}}
-  .stat .v{font-size:74px;font-weight:800;letter-spacing:-0.045em;margin:12px 0 8px}
+  .stat .t{font-size:27px;font-weight:700;letter-spacing:.03em;color:${T.muted}}
+  .stat .v{font-size:74px;font-weight:700;letter-spacing:-0.045em;margin:12px 0 8px}
   .stat .d{font-size:25px;color:${T.muted};line-height:1.5;letter-spacing:-0.015em;white-space:pre-line}
 
   .src{font-size:24px;font-weight:600;color:${T.muted};letter-spacing:.03em;
@@ -128,7 +137,7 @@ const CSS = (T) => `
   .chips span.on{background:${T.accent};border-color:${T.accent};color:#fff}
 
   .flow{display:flex;align-items:center;gap:26px}
-  .chip{padding:23px 34px;border-radius:999px;font-size:29px;font-weight:800;letter-spacing:-0.015em}
+  .chip{padding:23px 34px;border-radius:999px;font-size:29px;font-weight:700;letter-spacing:-0.015em}
   .chip.off{background:${T.track};color:${T.muted}}
   .chip.on{background:${T.accent};color:#fff}
 
@@ -252,7 +261,7 @@ function visual(v, T) {
   return '';
 }
 
-function slideHtml(s, meta, T, charRel, anim) {
+function slideHtml(s, meta, T, charRel, fontRel, anim) {
   const ch = s.character
     ? `<img class="char${s.character === 'fairy' ? ' float' : ''}" src="${charRel}/${
         s.character
@@ -262,7 +271,7 @@ function slideHtml(s, meta, T, charRel, anim) {
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<style>${CSS(T)}</style>
+<style>${CSS(T, fontRel)}</style>
 </head>
 <body class="${anim ? 'anim' : ''}">
   <div class="pad head">
@@ -316,6 +325,8 @@ function main() {
 
   const charDir = join(REPO_ROOT, 'assets', 'characters');
   const charRel = relative(outDir, charDir).replace(/\\/g, '/');
+  const fontDir = join(REPO_ROOT, 'assets', 'fonts');
+  const fontRel = relative(outDir, fontDir).replace(/\\/g, '/');
 
   const missing = new Set();
   for (const s of data.slides) {
@@ -329,7 +340,7 @@ function main() {
 
   for (const s of data.slides) {
     const f = join(outDir, `slide-${String(s.n).padStart(2, '0')}.html`);
-    writeFileSync(f, slideHtml(s, meta, T, charRel, anim));
+    writeFileSync(f, slideHtml(s, meta, T, charRel, fontRel, anim));
   }
   console.log(`✓ ${data.slides.length}장 ${anim ? '애니메이션 ' : ''}HTML 생성 → ${outDir}`);
   console.log(
