@@ -63,7 +63,7 @@ const CSS = (T, fontRel) => `
 
   /* 상단 헤더 */
   .head{top:60px;display:flex;justify-content:space-between;align-items:baseline;
-        font-size:26px;font-weight:600;letter-spacing:-0.01em}
+        font-size:28px;font-weight:600;letter-spacing:-0.01em}
   .head .rt{font-variant-numeric:tabular-nums;letter-spacing:0.06em}
 
   /* 배경 고스트 넘버 */
@@ -71,17 +71,17 @@ const CSS = (T, fontRel) => `
          line-height:.8;color:rgba(26,26,26,.055);letter-spacing:-0.04em;z-index:0}
 
   /* 라벨 */
-  .label{font-size:23px;font-weight:700;letter-spacing:.18em;color:${T.accent};
+  .label{font-size:25px;font-weight:700;letter-spacing:.18em;color:${T.accent};
          display:flex;align-items:center;gap:14px}
   .label b{font-size:18px;transform:translateY(-1px)}
 
   /* 헤드라인 */
-  h1{font-size:60px;font-weight:700;line-height:1.24;letter-spacing:-0.035em;
+  h1{font-size:64px;font-weight:700;line-height:1.24;letter-spacing:-0.035em;
      word-break:keep-all;margin-top:18px}
   h1 .hl{color:${T.accent}}
   .rule{height:5px;background:${T.accent};border-radius:3px;margin-top:26px}
-  .sub{margin-top:26px;font-size:36px;font-weight:700;color:${T.accent};letter-spacing:-0.025em;line-height:1.35}
-  .note{margin-top:16px;font-size:29px;color:${T.muted};letter-spacing:-0.015em;line-height:1.5;white-space:pre-line}
+  .sub{margin-top:26px;font-size:40px;font-weight:700;color:${T.accent};letter-spacing:-0.025em;line-height:1.35}
+  .note{margin-top:18px;font-size:33px;color:${T.body};letter-spacing:-0.015em;line-height:1.5;white-space:pre-line}
 
   /* 캐릭터 — 배경이 크림이라 누끼 없이 얹고 가장자리만 부드럽게 지운다 */
   .char{position:absolute;z-index:1;pointer-events:none;
@@ -89,13 +89,13 @@ const CSS = (T, fontRel) => `
         mask-image:radial-gradient(circle at 50% 48%, #000 58%, rgba(0,0,0,0) 76%)}
 
   /* 하단 */
-  .swipe{bottom:150px;font-size:30px;font-weight:700;color:${T.accent};z-index:2}
-  .swipe i{font-size:31px}
+  .swipe{bottom:150px;font-size:32px;font-weight:700;color:${T.accent};z-index:2}
+  .swipe i{font-size:33px}
   .foot{bottom:64px;display:flex;justify-content:space-between;align-items:baseline;z-index:2}
-  .foot .h{font-size:27px;font-weight:700;letter-spacing:-0.01em}
+  .foot .h{font-size:29px;font-weight:700;letter-spacing:-0.01em}
   /* 핸들 옆 표시이름 — 같은 줄, 위계만 낮춤 */
-  .foot .h em{font-style:normal;font-weight:600;color:${T.muted};margin-left:12px;font-size:25px}
-  .foot .s{font-size:26px;font-weight:600;color:${T.muted}}
+  .foot .h em{font-style:normal;font-weight:600;color:${T.meta};margin-left:12px;font-size:27px}
+  .foot .s{font-size:27px;font-weight:600;color:${T.meta}}
 
   /* ── 시각 요소 ───────────────────────────── */
   .card{background:${T.card};border:1.5px solid ${T.line};border-radius:22px}
@@ -106,10 +106,10 @@ const CSS = (T, fontRel) => `
   .barrow{margin-bottom:32px}
   .brhead{display:flex;justify-content:space-between;align-items:baseline;
           gap:20px;margin-bottom:13px}
-  .barrow .k{font-size:29px;font-weight:700;letter-spacing:-0.015em}
-  .barrow .v{font-size:29px;font-weight:700;letter-spacing:-0.015em;
+  .barrow .k{font-size:32px;font-weight:700;letter-spacing:-0.015em}
+  .barrow .v{font-size:32px;font-weight:700;letter-spacing:-0.015em;
              white-space:nowrap;text-align:right}
-  .barrow .v.muted{color:${T.muted}}
+  .barrow .v.muted{color:${T.meta}}
   .barrow .v.accent{color:${T.accent}}
   .track{display:block;width:100%;height:56px;border-radius:28px;
          background:${T.track};overflow:hidden;position:relative}
@@ -118,11 +118,11 @@ const CSS = (T, fontRel) => `
 
   .statwrap{display:flex;gap:22px}
   .stat{flex:1;padding:38px 34px}
-  .stat .t{font-size:27px;font-weight:700;letter-spacing:.03em;color:${T.muted}}
+  .stat .t{font-size:29px;font-weight:700;letter-spacing:.03em;color:${T.meta}}
   .stat .v{font-size:74px;font-weight:700;letter-spacing:-0.045em;margin:12px 0 8px}
-  .stat .d{font-size:25px;color:${T.muted};line-height:1.5;letter-spacing:-0.015em;white-space:pre-line}
+  .stat .d{font-size:28px;color:${T.body};line-height:1.5;letter-spacing:-0.015em;white-space:pre-line}
 
-  .src{font-size:24px;font-weight:600;color:${T.muted};letter-spacing:.03em;
+  .src{font-size:27px;font-weight:600;color:${T.meta};letter-spacing:.03em;
        font-variant-numeric:tabular-nums}
 
   .dots{display:grid;grid-template-columns:repeat(10,1fr);gap:13px}
@@ -132,13 +132,13 @@ const CSS = (T, fontRel) => `
   /* 태그 목록 — 항목 나열용 (데이터가 아니라 범위를 보여줄 때) */
   .chips{display:flex;flex-wrap:wrap;gap:18px;max-width:880px}
   .chips span{padding:19px 32px;border-radius:999px;background:${T.card};
-              border:1.5px solid ${T.line};font-size:29px;font-weight:700;
+              border:1.5px solid ${T.line};font-size:32px;font-weight:700;
               letter-spacing:-0.015em}
   .chips span.on{background:${T.accent};border-color:${T.accent};color:#fff}
 
   .flow{display:flex;align-items:center;gap:26px}
-  .chip{padding:23px 34px;border-radius:999px;font-size:29px;font-weight:700;letter-spacing:-0.015em}
-  .chip.off{background:${T.track};color:${T.muted}}
+  .chip{padding:23px 34px;border-radius:999px;font-size:32px;font-weight:700;letter-spacing:-0.015em}
+  .chip.off{background:${T.track};color:${T.meta}}
   .chip.on{background:${T.accent};color:#fff}
 
   /* ── 애니메이션 (body.anim 일 때만) ─────────────────
@@ -316,7 +316,13 @@ function main() {
   }
   const data = JSON.parse(readFileSync(dataPath, 'utf-8'));
   const topic = args.topic || data.topic || 'default';
-  const T = data.theme;
+  const T = { ...data.theme };
+  /* 회색 글자가 폰 화면에서 안 읽힌다는 지적(2026-08-27).
+     실제로 T.muted(#A0968A)는 크림 배경(#F1E9DE) 위에서 명도대비가 2.3:1 밖에 안 된다.
+     본문에 쓰면 안 되는 값이다(AA 기준 4.5:1). 장식용으로만 남기고,
+     읽어야 하는 글자는 아래 두 토큰을 쓴다. 테마 JSON 에서 덮어쓸 수 있다. */
+  T.body = T.body ?? '#584F45'; // 본문 회색 — 대비 약 6.7:1
+  T.meta = T.meta ?? '#6B6156'; // 출처·푸터 등 작은 메타 — 대비 약 5.0:1
   const meta = data.meta;
 
   const anim = args.animate !== undefined;
